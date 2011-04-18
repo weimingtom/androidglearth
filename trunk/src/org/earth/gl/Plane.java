@@ -2,9 +2,7 @@ package org.earth.gl;
 
 import android.opengl.GLES20;
 
-public class Plane {
-	public GLBuffer vertexBuffer;
-	public GLBuffer texCoordBuffer;
+public class Plane extends Mesh{
 	
 	public Plane(Context context, int width, int height) {
 		 /** @inheritDoc */
