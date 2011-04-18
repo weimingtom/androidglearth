@@ -2,6 +2,7 @@ package org.earth.gl;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.ArrayList;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
@@ -43,5 +44,25 @@ public class Utils {
 			Log.e(TAG, op + ": glError " + error);
 			throw new RuntimeException(op + ": glError " + error);
 		}
+	}
+
+	public static float [] toFloatArray(ArrayList<Float> arraylist) {
+		float [] tmp = new float [arraylist.size()];
+		int i = 0;
+		for(float f: arraylist) {
+			tmp[i]=f;
+			i++;
+		}
+		return tmp;
+	}
+
+	public static int[] toIntArray(ArrayList<Integer> arraylist) {
+		int [] tmp = new int [arraylist.size()];
+		int i = 0;
+		for(int f: arraylist) {
+			tmp[i]=f;
+			i++;
+		}
+		return tmp;
 	}
 }
