@@ -6,6 +6,7 @@ import org.earth.scene.Scene;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
+import android.util.Log;
 
 public class Context {
 	private GLSurfaceView canvas;
@@ -98,6 +99,10 @@ public class Context {
 		  this.scene.recalcTilesVertically();
 	}
 	
+	private void loadIdentity() {
+		Matrix.setIdentityM(modelViewMatrix, 0);
+	}
+	
 	public void translate(float x, float y, float z) {
 		float [] mmmatrix = {
 			1, 0, 0, x,
@@ -173,8 +178,49 @@ public class Context {
 		this.translate(-eye.x, -eye.y, -eye.z);
 	}
 	
-	public void flushMVPM() {
+	public float[] flushMVPM() {
+		this.mvpm = Utils.multMatrix(this.projectionMatrix,this.modelViewMatrix);
+		this.mvpmInverse = Utils.inverseMatrix(this.mvpm);
+		return this.mvpm;
+	}
+	
+	public void renderFrame() {
+		// TODO
+//		if (we.CALC_FPS && !goog.isNull(this.fpsbox_)) {
+//		    /** @type {number} */
+//		    var time = goog.now();
+//		    if (this.lastFpsCalc_ < goog.now() - 2000) {
+//		      this.fps = 1000 *
+//		          this.framesSinceLastFpsCalc_ / (goog.now() - this.lastFpsCalc_);
+//		      this.averageFrameTime =
+//		          this.frameTimeSinceLastFpsCalc_ / this.framesSinceLastFpsCalc_;
+//		      this.lastFpsCalc_ = goog.now();
+//		      this.framesSinceLastFpsCalc_ = 0;
+//		      this.frameTimeSinceLastFpsCalc_ = 0;
+//
+//		      this.fpsbox_.innerHTML =
+//		          this.averageFrameTime.toFixed(2) +
+//		          ' ms / fps: ' +
+//		          this.fps.toFixed(2);
+//		    }
+//
+//		    this.framesSinceLastFpsCalc_++;
+//		  }
 		
+		  GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+
+		  this.loadIdentity();
+		 
+		  if (this.scene == null) {
+			  Log.e(Context.class.getName(), "Scene is not set");
+		  }
+
+		  this.scene.draw();
+
+		// TODO
+//		  if (we.CALC_FPS && !goog.isNull(this.fpsbox_)) {
+//		    this.frameTimeSinceLastFpsCalc_ += goog.now() - time;
+//		  }
 	}
 
 	public GLSurfaceView getCanvas() {

@@ -7,4 +7,9 @@ public class Scene {
 		
 	}
 
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
