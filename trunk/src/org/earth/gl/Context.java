@@ -3,6 +3,7 @@ package org.earth.gl;
 import org.earth.geom.Vec3;
 import org.earth.scene.Scene;
 
+import android.app.Activity;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
@@ -27,9 +28,11 @@ public class Context {
 	private int lastFpsCalc_;
 	private int framesSinceLastFpsCalc_;
 	private int frameTimeSinceLastFpsCalc_;
-	private Scene scene;
+	public Scene scene;
+	public Activity activity;
 
-	public Context(GLSurfaceView canvas, Object opt_fpsbox, Object opt_onfail) {
+	public Context(Activity activity, GLSurfaceView canvas, Object opt_fpsbox, Object opt_onfail) {
+		this.activity = activity;
 		this.canvas = canvas;
 		this.opt_fpsbox = opt_fpsbox;
 		this.opt_onfail = opt_onfail;
@@ -221,30 +224,6 @@ public class Context {
 //		  if (we.CALC_FPS && !goog.isNull(this.fpsbox_)) {
 //		    this.frameTimeSinceLastFpsCalc_ += goog.now() - time;
 //		  }
-	}
-
-	public GLSurfaceView getCanvas() {
-		return canvas;
-	}
-
-	public void setCanvas(GLSurfaceView canvas) {
-		this.canvas = canvas;
-	}
-
-	public Object getOpt_fpsbox() {
-		return opt_fpsbox;
-	}
-
-	public void setOpt_fpsbox(Object opt_fpsbox) {
-		this.opt_fpsbox = opt_fpsbox;
-	}
-
-	public Object getOpt_onfail() {
-		return opt_onfail;
-	}
-
-	public void setOpt_onfail(Object opt_onfail) {
-		this.opt_onfail = opt_onfail;
 	}
 
 }
