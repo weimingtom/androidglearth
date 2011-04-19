@@ -2,7 +2,7 @@ package org.earth.gl;
 
 import android.opengl.GLES20;
 
-public class Plane extends Mesh{
+public class Plane extends Mesh {
 	
 	public Plane(Context context, int width, int height) {
 		 /** @inheritDoc */

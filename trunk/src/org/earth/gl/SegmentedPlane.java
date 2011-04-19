@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import android.opengl.GLES20;
 
-public class SegmentedPlane extends Mesh{
+public class SegmentedPlane extends Mesh {
 	private static final double LN2 = 0.6931471805599453f;
 	
 	private ArrayList<Float> vertices_;
