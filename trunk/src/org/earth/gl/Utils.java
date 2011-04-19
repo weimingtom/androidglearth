@@ -20,6 +20,14 @@ public class Utils {
 		m1=m3;
 		return m1;
 	}
+	
+	public static float[] multMatrixVector(float[] m1, float[] m2) {
+		// TODO
+		float[] m3 = new float[16];
+		Matrix.multiplyMV(m3 , 0, m1, 0, m2, 0);
+		m1=m3;
+		return m1;
+	}
 
 	public static float[] inverseMatrix(float[] m1) {
 		float[] m2 = new float[16];
@@ -72,5 +80,12 @@ public class Utils {
 			float[] mvpmInverse, int viewportWidth, int viewportHeight) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static float[] multMatrixFloat(float[] result, float f) {
+		for(int i = 0; i<result.length; i++) {
+			result[i]=f*result[i];
+		}
+		return result;
 	}
 }
