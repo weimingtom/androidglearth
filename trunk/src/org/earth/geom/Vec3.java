@@ -1,6 +1,6 @@
 package org.earth.geom;
 
-public class Vec3 {
+public class Vec3 implements Cloneable{
 	public float x;
 	public float y;
 	public float z;
@@ -26,7 +26,7 @@ public class Vec3 {
 		return this.scale(1 / this.magnitude());
 	}
 
-	private Vec3 scale(float s) {
+	public Vec3 scale(float s) {
 		this.x *= s;
 		this.y *= s;
 		this.z *= s;
@@ -41,5 +41,25 @@ public class Vec3 {
 	public static Vec3 cross(Vec3 a, Vec3 b) {
 		return new Vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y
 				- a.y * b.x);
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
+	public Vec3 invert() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static float dot(Vec3 direction, Vec3 sphereCenter) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public static Vec3 sum(Vec3 orig, Vec3 scale) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
