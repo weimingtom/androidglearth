@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.opengl.GLES20;
 
 public class SegmentedPlane extends Mesh {
-	private static final double LN2 = 0.6931471805599453f;
 	
 	private ArrayList<Float> vertices_;
 	private ArrayList<Float> coords_;
@@ -194,7 +193,7 @@ public class SegmentedPlane extends Mesh {
 	}
 
 	public int nearestLowerPOT(float num) {
-		return (int) Math.max(1, Math.pow(2, Math.ceil(Math.log(num) / LN2)));
+		return (int) Math.max(1, Math.pow(2, Math.ceil(Math.log(num) / org.earth.Utils.LN2)));
 	}
 	
 	public int calcSubdiv(boolean nolod, int subdiv, int x, int y) {
