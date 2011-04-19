@@ -62,4 +62,9 @@ public class Vec3 implements Cloneable{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public static float distance(Vec3 point, Vec3 cameraPos) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

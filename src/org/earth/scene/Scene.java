@@ -5,6 +5,8 @@ import org.earth.gl.Context;
 import org.earth.gl.Utils;
 import org.earth.texturing.TileProvider;
 
+import android.opengl.Matrix;
+
 public class Scene {
 
 	private static final double MIN_ZOOM = 1;
@@ -118,4 +120,74 @@ public class Scene {
 			return array;
 		}
 	}
+	
+	/**
+	 * Calculates screen-space coordinates for given geo-space coordinates.
+	 * @param {number} lat Latitude in degrees.
+	 * @param {number} lon Longitude in degrees.
+	 * @return {?Array.<number>} Array [x, y, visibility] or null.
+	 */
+	public float[] getXYForLatLon (float lat, float lon) {
+	  lat = (float) Math.toRadians(lat);
+	  lon = (float) Math.toRadians(lon);
+
+	  float cosy = (float) Math.cos(lat);
+	  Vec3 point = new Vec3((float)Math.sin(lon) * cosy,
+							  (float)Math.sin(lat),
+							  (float)Math.cos(lon) * cosy);
+	  float[] m2 = 
+	  {
+		point.x, 
+		point.y, 
+		point.z,
+		1
+	  };
+	  float[] result = Utils.multMatrixVector(this.context.mvpm, m2);
+
+	  if (result[3] == 0)
+	    return null;
+
+	  
+	  result =  Utils.multMatrixFloat(result, 1 / result[3]);
+
+	  /** @type {number} */
+	  float x = ((result[0]) + 1) / 2 * this.context.viewportWidth;
+	  /** @type {number} */
+	  float y = ((result[1]) - 1) / (-2) * this.context.viewportHeight;
+
+	  /** @type {number} */
+	  float visibility = 1;
+
+	  if (x < 0 || x > this.context.viewportWidth ||
+	      y < 0 || y > this.context.viewportHeight) {
+	    visibility = 0;
+	  } else {
+	    Vec3 cameraPos = Utils.unprojectPoint(0.5f, 0.5f, 0,
+	                                               this.context.mvpmInverse, 1, 1);
+
+	    if (cameraPos == null)
+	      return null;
+
+	    float distance = Vec3.distance(point, cameraPos);
+	    Vec3 direction = point.subtract(cameraPos).normalize();
+	    float[] ds = this.traceDistance_(cameraPos, direction);
+
+	    if (ds == null) {
+	      visibility = 0; // Wait.. what? This should never happen..
+	    } else {
+	      visibility = (Math.abs(distance - ds[0]) < Math.abs(distance - ds[1])) ?
+	                   1 : 0;
+	    }
+	  }
+	  float[] array = {x, y, visibility};
+	  return array;
+	};
+	
+	public float projectLatitude(float latitude) {
+		  return (float) Math.log(Math.tan(latitude / 2.0 + Math.PI / 4.0));
+	};
+	
+	public float unprojectLatitude(float latitude) {
+		  return (float) (2 * Math.atan(Math.exp(latitude)) - Math.PI / 2);
+	};
 }
