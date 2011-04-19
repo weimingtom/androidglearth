@@ -5,19 +5,16 @@ import org.earth.gl.Context;
 import org.earth.gl.Utils;
 import org.earth.texturing.TileProvider;
 
-import android.opengl.Matrix;
-
 public class Scene {
-
-	private static final double MIN_ZOOM = 1;
-	private Context context;
-	private boolean infobox_;
-	private boolean tpCopyrightElement_;
-	private boolean tpLogoImg_;
-	private boolean additionalCopyright_;
-	private Earth earth;
-	private float tilesVertically;
-	private Camera camera;
+	public static final double MIN_ZOOM = 1;
+	public Context context;
+	public boolean infobox_;
+	public boolean tpCopyrightElement_;
+	public boolean tpLogoImg_;
+	public boolean additionalCopyright_;
+	public Earth earth;
+	public float tilesVertically;
+	public Camera camera;
 
 	public Scene(Context context, boolean opt_infobox,
 			boolean opt_copyrightbox, boolean opt_logobox,
