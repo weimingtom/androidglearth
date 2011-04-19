@@ -4,6 +4,8 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
 
+import org.earth.geom.Vec3;
+
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.util.Log;
@@ -64,5 +66,11 @@ public class Utils {
 			i++;
 		}
 		return tmp;
+	}
+
+	public static Vec3 unprojectPoint(float x, float y, int i,
+			float[] mvpmInverse, int viewportWidth, int viewportHeight) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
