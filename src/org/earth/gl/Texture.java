@@ -16,7 +16,7 @@ public class Texture {
 		// generates
 		int texture[] = new int[1];
 		
-		// Generate and bind to the texture (gl is my GL10 object)
+		// Generate and bind to the texture
 		GLES20.glGenTextures(1, texture, 0);
 		int textureId = texture[0];
 		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
