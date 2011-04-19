@@ -7,7 +7,6 @@ import org.earth.texturing.TileProvider;
 
 public class Scene {
 	public static final double MIN_ZOOM = 1;
-	public static final float EARTH_RADIUS = 0;
 	
 	public Context context;
 	public boolean infobox_;
