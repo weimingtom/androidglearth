@@ -18,4 +18,9 @@ public class Utils {
 		return 0;
 	}
 
+	public static float toFixed(float bufferSideSize_, int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

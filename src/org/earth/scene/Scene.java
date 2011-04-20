@@ -19,7 +19,7 @@ public class Scene {
 
 	public Scene(Context context, boolean opt_infobox,
 			boolean opt_copyrightbox, boolean opt_logobox,
-			TileProvider opt_tileProvider, boolean opt_copyright) {
+			TileProvider opt_tileProvider, boolean opt_copyright) throws Exception {
 		this.context = context;
 		this.infobox_ = opt_infobox;
 		this.tpCopyrightElement_ = opt_copyrightbox;
