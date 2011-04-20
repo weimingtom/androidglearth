@@ -33,7 +33,7 @@ public class Scene {
 		this.updateCopyrights();
 	}
 
-	private void updateCopyrights() {
+	public void updateCopyrights() {
 		// TODO Auto-generated method stub
 
 	}
@@ -181,11 +181,11 @@ public class Scene {
 	  return array;
 	};
 	
-	public float projectLatitude(float latitude) {
+	public static float projectLatitude(float latitude) {
 		  return (float) Math.log(Math.tan(latitude / 2.0 + Math.PI / 4.0));
 	};
 	
-	public float unprojectLatitude(float latitude) {
+	public static float unprojectLatitude(float latitude) {
 		  return (float) (2 * Math.atan(Math.exp(latitude)) - Math.PI / 2);
 	};
 }

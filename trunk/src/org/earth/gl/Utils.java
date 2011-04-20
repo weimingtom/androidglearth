@@ -88,4 +88,9 @@ public class Utils {
 		}
 		return result;
 	}
+
+	public static float[] transposeMatrix(float[] flushMVPM) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
