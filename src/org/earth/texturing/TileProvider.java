@@ -2,17 +2,19 @@ package org.earth.texturing;
 
 public class TileProvider {
 
-	public double getMinZoomLevel() {
+	public String loadingTileCounter;
+
+	public int getMinZoomLevel() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public double getMaxZoomLevel() {
+	public int getMaxZoomLevel() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public double getTileSize() {
+	public int getTileSize() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

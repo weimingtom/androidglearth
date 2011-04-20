@@ -23,4 +23,9 @@ public class Utils {
 		return 0;
 	}
 
+	public static float[] flatten(float[][] metaBuffer) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
