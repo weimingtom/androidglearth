@@ -11,4 +11,9 @@ public class ClipLevelN {
 
 	public int texture;
 
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
