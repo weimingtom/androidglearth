@@ -49,6 +49,7 @@ public class ClipLevelN {
 		GLES20.glDeleteTextures(1, a, 0);
 	}
 
+	// TODO
 	public void handleLoadedTile(Tile tile) {
 		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
 		GLES20.glTexSubImage2D(GLES20.GL_TEXTURE_2D, 0, 0, 0,
@@ -56,18 +57,19 @@ public class ClipLevelN {
 				GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, tile.image);
 	}
 
+	// TODO
 	public void loadPart(int x, int y) {
 		Tile tile = new Tile(x, y, 0) {
 
 			@Override
-			public void onload() {
+			public void onload(TileProvider tileprovider) {
 				if (!GLES20.glIsTexture(texture))
 					return; // late tile
 				handleLoadedTile(this);
 			}
 
 			@Override
-			public void onerror() {
+			public void onerror(TileProvider tileprovider) {
 				if (!GLES20.glIsTexture(texture))
 					return; // late tile
 				this.failed++;
@@ -82,6 +84,7 @@ public class ClipLevelN {
 			}
 		};
 		tile.imagesrc = tileprovider.getTileURL(zoom, x, y); // start loading
+		tile.load();
 	}
 
 }

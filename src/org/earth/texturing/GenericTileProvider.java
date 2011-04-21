@@ -1,14 +1,37 @@
 package org.earth.texturing;
 
-public class GenericTileProvider extends TileProvider {
+import java.net.URL;
 
-	public GenericTileProvider() {
+public class GenericTileProvider extends TileProvider {
+	
+	public GenericTileProvider(String name, String string2, int i, int j,
+			int k) {
+		super(name);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public GenericTileProvider(String string, String string2, int i, int j,
-			int k) {
-		// TODO Auto-generated constructor stub
+
+	@Override
+	public int getMaxZoomLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getTileSize() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public URL getTileURL(int zoom, int x, int y) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void tileLoadedHandler(Tile tile) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
