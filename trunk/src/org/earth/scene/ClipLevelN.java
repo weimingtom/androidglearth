@@ -5,6 +5,7 @@ import org.earth.texturing.Tile;
 import org.earth.texturing.TileProvider;
 
 import android.opengl.GLES20;
+import android.opengl.GLUtils;
 import android.util.Log;
 
 public class ClipLevelN {
@@ -52,9 +53,9 @@ public class ClipLevelN {
 	// TODO
 	public void handleLoadedTile(Tile tile) {
 		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
-		GLES20.glTexSubImage2D(GLES20.GL_TEXTURE_2D, 0, 0, 0,
-				tile.x * tileSize, (tileCount - tile.y - 1) * tileSize,
-				GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, tile.image);
+		GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0,
+				tile.x * tileSize, (tileCount - tile.y - 1) * tileSize, tile.image,
+				GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE );	
 	}
 
 	// TODO
@@ -84,7 +85,7 @@ public class ClipLevelN {
 			}
 		};
 		tile.imagesrc = tileprovider.getTileURL(zoom, x, y); // start loading
-		tile.load();
+		tile.load(tileprovider);
 	}
 
 }
