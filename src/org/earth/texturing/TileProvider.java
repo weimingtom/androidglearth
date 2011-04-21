@@ -1,7 +1,6 @@
 package org.earth.texturing;
 
 import java.net.URL;
-import java.nio.Buffer;
 
 import org.earth.texturing.Tile.State;
 
@@ -54,7 +53,7 @@ public abstract class TileProvider {
 
 		t.state = State.LOADING;
 		t.imagesrc = this.getTileURL(tile.zoom, tile.x, tile.y);
-		t.load();
+		t.load(this);
 
 		Log.i(TAG, "Loading tile " + t.getKey());
 
