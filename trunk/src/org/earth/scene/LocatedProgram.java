@@ -2,8 +2,12 @@ package org.earth.scene;
 
 import org.earth.gl.Context;
 
-public class LocatedProgram {
+import android.opengl.GLES20;
+import android.util.Log;
 
+public class LocatedProgram {
+	private static final String TAG = "LocatedProgram";
+	
 	public int program;
 	public int bufferL0Uniform;
 	public int bufferL1Uniform;
@@ -26,8 +30,72 @@ public class LocatedProgram {
 	public int tileCountUniform;
 	public int offsetUniform;
 
-	public LocatedProgram(int shaderProgram, Context context, boolean terrain) {
-		// TODO Auto-generated constructor stub
+	public LocatedProgram(int program, Context context, boolean terrain) {
+		this.program = program;
+
+		this.vertexPositionAttribute = GLES20.glGetAttribLocation(this.program,
+				"aVertexPosition");
+		GLES20.glEnableVertexAttribArray(this.vertexPositionAttribute);
+
+		this.textureCoordAttribute = GLES20.glGetAttribLocation(this.program,
+				"aTextureCoord");
+		GLES20.glEnableVertexAttribArray(this.textureCoordAttribute);
+
+		this.mvpMatrixUniform = this.getValidatedUniformLocation_(this.program,
+				"uMVPMatrix");
+
+		this.metaL0Uniform = this.getValidatedUniformLocation_(this.program,
+				"uMetaL0");
+
+		this.metaL1Uniform = this.getValidatedUniformLocation_(this.program,
+				"uMetaL1");
+
+		this.metaL2Uniform = this.getValidatedUniformLocation_(this.program,
+				"uMetaL2");
+
+		this.levelOffsetsUniform = this.getValidatedUniformLocation_(
+				this.program, "uOffL");
+
+		this.bufferL0Uniform = this.getValidatedUniformLocation_(this.program,
+				"uBufferL0");
+
+		this.bufferL1Uniform = this.getValidatedUniformLocation_(this.program,
+				"uBufferL1");
+
+		this.bufferL2Uniform = this.getValidatedUniformLocation_(this.program,
+				"uBufferL2");
+
+		this.bufferLnUniform = this.getValidatedUniformLocation_(this.program,
+				"uBufferLn");
+
+		if (terrain) {
+			this.degradationTUniform = this.getValidatedUniformLocation_(
+					this.program, "uDegradationT");
+			this.metaL0TUniform = this.getValidatedUniformLocation_(
+					this.program, "uMetaL0T");
+			this.metaL1TUniform = this.getValidatedUniformLocation_(
+					this.program, "uMetaL1T");
+			this.levelOffsetsTUniform = this.getValidatedUniformLocation_(
+					this.program, "uOffLT");
+			this.bufferL0TUniform = this.getValidatedUniformLocation_(
+					this.program, "uBufferL0T");
+			this.bufferL1TUniform = this.getValidatedUniformLocation_(
+					this.program, "uBufferL1T");
+			this.bufferLnTUniform = this.getValidatedUniformLocation_(
+					this.program, "uBufferLnT");
+			this.tileCountUniform = this.getValidatedUniformLocation_(
+					this.program, "uTileCount");
+			this.offsetUniform = this.getValidatedUniformLocation_(
+					this.program, "uOffset");
+		}
+	}
+
+	private int getValidatedUniformLocation_(int program, String name) {
+		int result = GLES20.glGetUniformLocation(program, name);
+		if (result == 0) {
+			Log.w(TAG, "Invalid name " + name);
+		}
+		return result;
 	}
 
 }

@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class ClipLevelN {
 
-	protected static final String TAG = null;
+	protected static final String TAG = "ClipLevelN";
 	public int texture;
 	private int tileCount;
 	private int tileSize;
