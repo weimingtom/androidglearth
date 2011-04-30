@@ -15,6 +15,7 @@ public abstract class Tile implements Comparable<Tile> {
 	public State state;
 	public URL imagesrc;
 	public int zoom;
+	public long requestTime;
 
 	public Tile(int x, int y, int failed) {
 		this.x = x;
@@ -24,7 +25,7 @@ public abstract class Tile implements Comparable<Tile> {
 		this.state = State.PREPARING;
 	}
 
-	public String createKey(int zoom, int x, int y) {
+	public static String createKey(int zoom, int x, int y) {
 		return zoom + "_" + x + "_" + y;
 	}
 

@@ -1,5 +1,11 @@
 package org.earth;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.earth.texturing.Tile;
+
 public class Utils {
 	public static final float LN2 = 0.6931471805599453f;
 
@@ -31,6 +37,27 @@ public class Utils {
 	public static void splice(float[] fs, int i, int diffX) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public static <E> E shift(List<E> arrayList) {
+		E obj = arrayList.get(0);
+		arrayList.remove(0);
+	    return obj;
+	}
+
+	public static <E> E pop(List<E> arrayList) {
+		E obj = arrayList.get(arrayList.size()-1);
+		arrayList.remove(arrayList.size()-1);
+	    return obj;
+	}
+	
+	public interface CollectionFilter<E> {
+		public boolean filter(E e, int i, Collection<E> coll);
+	}
+
+	public static <E> List<E> filter(Collection<E> values, CollectionFilter<E> filter) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
