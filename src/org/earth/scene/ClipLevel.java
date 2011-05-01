@@ -135,34 +135,33 @@ public class ClipLevel {
 			if (Math.abs(diffX) >= this.side_ || Math.abs(diffY) >= this.side_) {
 				this.resetMeta_(); // too different - reset everything
 			} else {
+
+				if (diffX > 0) {
+					for (int i = 0; i < this.side_; ++i) {
+						Utils.splice(this.metaBuffer[i], 0, diffX);
+						Utils.push(this.metaBuffer[i],diffX);
+					}
+				}
 				// TODO
-//				if (diffX > 0) {
-//					for (int i = 0; i < this.side_; ++i) {
-//						Utils.splice(this.metaBuffer[i], 0, diffX);
-//						this.metaBuffer[i]=.push.apply(this.metaBuffer[i],
-//								new Array(diffX));
-//					}
-//				}
-//				if (diffX < 0) {
-//					for (int i = 0; i < this.side_; ++i) {
-//						Utils.splice(this.metaBuffer[i], this.side_ + diffX,
-//								-diffX);
-//						this.metaBuffer[i].unshift.apply(this.metaBuffer[i],
-//								new Array(-diffX));
-//					}
-//				}
-//				if (diffY > 0) {
-//					for (int i = 0; i < diffY; ++i) {
-//						this.metaBuffer.shift();
-//						this.metaBuffer.push(new Array(this.side_));
-//					}
-//				}
-//				if (diffY < 0) {
-//					for (int i = 0; i < -diffY; ++i) {
-//						this.metaBuffer.pop();
-//						this.metaBuffer.unshift(new Array(this.side_));
-//					}
-//				}
+				if (diffX < 0) {
+					for (int i = 0; i < this.side_; ++i) {
+						Utils.splice(this.metaBuffer[i], this.side_ + diffX,
+								-diffX);
+						Utils.unshift(this.metaBuffer[i],-diffX);
+					}
+				}
+				if (diffY > 0) {
+					for (int i = 0; i < diffY; ++i) {
+						this.metaBuffer = Utils.shift(float[].class,this.metaBuffer);
+						//this.metaBuffer = Utils.push(this.metaBuffer,this.side_);
+					}
+				}
+				if (diffY < 0) {
+					for (int i = 0; i < -diffY; ++i) {
+						//Utils.pop(this.metaBuffer);
+						//this.metaBuffer.unshift(new Array(this.side_));
+					}
+				}
 			}
 		}
 		this.needTiles_();

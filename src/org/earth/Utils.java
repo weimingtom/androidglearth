@@ -1,12 +1,9 @@
 package org.earth;
 
-import java.util.ArrayList;
+import java.lang.reflect.Array;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-import org.earth.texturing.Tile;
 
 public class Utils {
 	public static final float LN2 = 0.6931471805599453f;
@@ -36,7 +33,42 @@ public class Utils {
 		return null;
 	}
 
-	public static void splice(float[] fs, int i, int diffX) {
+	/**
+	 * The splice() method adds and/or removes elements to/from an array
+	 * @param fs
+	 * @param index
+	 * @param howmany
+	 * @param elems
+	 * @return the modified array
+	 */
+	public static float[] splice(float[] src, int index, int howmany, float ... elems) {
+		float[] temp = null;
+		if(elems != null) {
+			// TODO
+			temp = new float[src.length-howmany+elems.length];
+			System.arraycopy(src, 0, temp, 0, index);
+			System.arraycopy(elems, 0, temp, index, elems.length);
+			System.arraycopy(src, index, temp, index+elems.length, src.length-index-howmany);
+		} else {
+			// TODO
+			temp = new float[src.length-howmany];
+			System.arraycopy(src, 0, temp, 0, index);
+			System.arraycopy(src, index, temp, index, src.length-index-howmany);
+		}
+		return temp;
+	}
+	
+	public static float[] push(float[] src, float ... elems) {
+		if(elems != null) {
+			float[] temp = new float[src.length+elems.length];
+			System.arraycopy(src, 0, temp, 0, src.length);
+			return temp;
+		} else {
+			return src;
+		}
+	}
+	
+	public static void unshift(float[] fs, int i) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -45,6 +77,13 @@ public class Utils {
 		E obj = arrayList.get(0);
 		arrayList.remove(0);
 	    return obj;
+	}
+	
+	public static <E> E[] shift(Class<E> c, E[] src) {
+		@SuppressWarnings("unchecked")
+		E[] temp = (E[]) Array.newInstance(c, src.length-1);
+		System.arraycopy(src, 1, temp, 0, temp.length);
+		return temp;
 	}
 
 	public static <E> E pop(List<E> arrayList) {
@@ -65,5 +104,6 @@ public class Utils {
 		Random rand = new Random();
 		return elems[rand.nextInt(elems.length-1)];
 	}
+
 
 }
