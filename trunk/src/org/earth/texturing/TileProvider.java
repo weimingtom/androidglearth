@@ -28,6 +28,8 @@ public abstract class TileProvider {
 	public abstract URL getTileURL(int zoom, int x, int y);
 
 	public abstract void tileLoadedHandler(Tile tile);
+	
+	public abstract void appendCopyrightContent();
 
 	public boolean loadTile(Tile tile) {
 		Tile t = new Tile(tile.x, tile.y, tile.failed) {
