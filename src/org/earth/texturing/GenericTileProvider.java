@@ -7,7 +7,6 @@ public class GenericTileProvider extends TileProvider {
 	public GenericTileProvider(String name, String string2, int i, int j,
 			int k) {
 		super(name);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -30,6 +29,12 @@ public class GenericTileProvider extends TileProvider {
 
 	@Override
 	public void tileLoadedHandler(Tile tile) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void appendCopyrightContent() {
 		// TODO Auto-generated method stub
 		
 	}

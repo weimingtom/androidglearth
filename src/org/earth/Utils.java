@@ -2,7 +2,9 @@ package org.earth;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import org.earth.texturing.Tile;
 
@@ -56,8 +58,12 @@ public class Utils {
 	}
 
 	public static <E> List<E> filter(Collection<E> values, CollectionFilter<E> filter) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public static <E> E randomElement(E ... elems) {
+		Random rand = new Random();
+		return elems[rand.nextInt(elems.length-1)];
 	}
 
 }
