@@ -29,7 +29,7 @@ public class Camera {
 	}
 
 	public void setPosition(float latitude, float longitude) {
-		this.latitude_ = org.earth.Utils.clamp(latitude, -1.5, 1.5);
+		this.latitude_ = org.earth.Utils.clamp(latitude, -1.5f, 1.5f);
 		this.longitude_ = org.earth.Utils.standardLongitudeRadians(longitude);
 
 		if (this.fixedAltitude) {

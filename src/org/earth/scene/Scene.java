@@ -6,7 +6,7 @@ import org.earth.gl.Utils;
 import org.earth.texturing.TileProvider;
 
 public class Scene {
-	public static final double MIN_ZOOM = 1;
+	public static final float MIN_ZOOM = 1;
 	
 	public Context context;
 	public boolean infobox_;
@@ -38,12 +38,12 @@ public class Scene {
 
 	}
 
-	public double getMinZoom() {
+	public float getMinZoom() {
 		return Math.max(MIN_ZOOM, this.earth.getCurrentTileProvider()
 				.getMinZoomLevel());
 	}
 
-	public double getMaxZoom() {
+	public float getMaxZoom() {
 		return this.earth.getCurrentTileProvider().getMaxZoomLevel();
 	}
 
