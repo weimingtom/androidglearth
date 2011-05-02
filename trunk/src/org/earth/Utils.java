@@ -18,19 +18,36 @@ public class Utils {
 		return a % b;
 	}
 
-	public static float clamp(float latitude, double d, double e) {
-		// TODO Auto-generated method stub
-		return 0;
+	public static float clamp(float number, float min, float max) {
+		return Math.max(min, Math.min(max, number));
 	}
 
-	public static float toFixed(float bufferSideSize_, int i) {
-		// TODO Auto-generated method stub
-		return 0;
+	/**
+	 * The toFixed() method formats a number to use a specified number of trailing decimals.
+	 * @param bufferSideSize_
+	 * @param i
+	 * @return
+	 */
+	public static float toFixed(float number, int i) {
+		int tmp = (int) (number*(10^i));
+		return ((float)tmp)/(10^i);
 	}
 
 	public static float[] flatten(float[][] metaBuffer) {
-		// TODO Auto-generated method stub
-		return null;
+		int size = 0;
+		for (int i = 0; i<metaBuffer.length; i++) {
+			size+=metaBuffer[i].length;
+		}
+		if(size>0) {
+			float[] tmp = new float[size];
+			size = 0;
+			for (int i = 0; i<metaBuffer.length; i++) {
+				System.arraycopy(metaBuffer[i], 0, tmp, size, metaBuffer[i].length);
+				size+=metaBuffer[i].length;
+			}
+			return tmp;
+		} else
+			return null;
 	}
 
 	/**
@@ -62,17 +79,59 @@ public class Utils {
 		if(elems != null) {
 			float[] temp = new float[src.length+elems.length];
 			System.arraycopy(src, 0, temp, 0, src.length);
+			System.arraycopy(elems, 0, temp, src.length, elems.length);
 			return temp;
 		} else {
 			return src;
 		}
 	}
 	
-	public static void unshift(float[] fs, int i) {
-		// TODO Auto-generated method stub
-		
+	public static <E> E[] push(Class<E> c, E[] src, E ... elems) {
+		if(elems != null) {
+			@SuppressWarnings("unchecked")
+			E[] temp = (E[]) Array.newInstance(c,src.length+elems.length);
+			System.arraycopy(src, 0, temp, 0, src.length);
+			return temp;
+		} else {
+			return src;
+		}
+	}
+	
+	/**
+	 * The unshift() method adds new elements to the beginning of an array
+	 * @param src
+	 * @param elems
+	 * @return the new array
+	 */
+	public static float[] unshift(float[] src, float ... elems) {
+		if(elems != null) {
+			float[] temp = new float[src.length+elems.length];
+			System.arraycopy(elems, 0, temp, 0, elems.length);
+			System.arraycopy(src, 0, temp, elems.length, src.length);
+			return temp;
+		} else {
+			return src;
+		}
 	}
 
+	/**
+	 * The unshift() method adds new elements to the beginning of an array
+	 * @param src
+	 * @param elems
+	 * @return the new array
+	 */
+	public static <E> E[] unshift(Class<E> c, E[] src, E ... elems) {
+		if(elems != null) {
+			@SuppressWarnings("unchecked")
+			E[] temp = (E[]) Array.newInstance(c,src.length+elems.length);
+			System.arraycopy(elems, 0, temp, 0, elems.length);
+			System.arraycopy(src, 0, temp, elems.length, src.length);
+			return temp;
+		} else {
+			return src;
+		}
+	}
+	
 	public static <E> E shift(List<E> arrayList) {
 		E obj = arrayList.get(0);
 		arrayList.remove(0);
@@ -103,6 +162,11 @@ public class Utils {
 	public static <E> E randomElement(E ... elems) {
 		Random rand = new Random();
 		return elems[rand.nextInt(elems.length-1)];
+	}
+
+	public static <E> E[] pop(Class<E> class1, E[] metaBuffer) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
