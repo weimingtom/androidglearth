@@ -48,7 +48,7 @@ public class Timer {
         long elapsed = now - mLastLogFPS;
         if (elapsed > 1000) {
             mLastLogFPS = now;
-            Log.i("EllisMarkov", "FPS: " + getFPS());
+            Log.i("Nicastel", "FPS: " + getFPS());
         }        
     }
 
