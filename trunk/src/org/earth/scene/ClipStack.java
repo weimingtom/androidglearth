@@ -45,7 +45,7 @@ public class ClipStack {
 
 		this.levels_ = new ClipLevel[maxLevel + 1 - minLevel];
 		for (int z = minLevel; z <= maxLevel; ++z) {
-			this.levels_[z] = new ClipLevel(tileprovider, context, side, z);
+			this.levels_[z-minLevel] = new ClipLevel(tileprovider, context, side, z);
 		}
 
 		for (int n = 0; n < buffers; ++n) {

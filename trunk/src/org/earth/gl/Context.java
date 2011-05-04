@@ -31,11 +31,16 @@ public class Context {
 	public Scene scene;
 	public Activity activity;
 
-	public Context(Activity activity, GLSurfaceView canvas, Object opt_fpsbox, Object opt_onfail) {
+	/**
+	 * Object wrapping a GL context.
+	 * @param {!Element} canvas Canvas element.
+	 * @param {Element=} opt_fpsbox Element to output fps information to.
+	 * @constructor
+	 */
+	public Context(Activity activity, GLSurfaceView canvas, Object opt_fpsbox) {
 		this.activity = activity;
 		this.canvas = canvas;
 		this.opt_fpsbox = opt_fpsbox;
-		this.opt_onfail = opt_onfail;
 
 		GLES20.glEnable(GLES20.GL_CULL_FACE);
 		GLES20.glCullFace(GLES20.GL_BACK);
