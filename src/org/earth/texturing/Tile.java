@@ -59,6 +59,7 @@ public abstract class Tile implements Comparable<Tile> {
 					InputStream is;
 					if(imagesrc==null) {
 						onerror(tileprovider);
+						return;
 					}
 					is = imagesrc.openStream();
 					
@@ -73,6 +74,7 @@ public abstract class Tile implements Comparable<Tile> {
 					}
 				} catch (Exception e) {
 					onerror(tileprovider);
+					return;
 				}
 				onload(tileprovider);
 			}

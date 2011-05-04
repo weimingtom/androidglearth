@@ -81,17 +81,9 @@ public class Earth {
 		this.changeTileProvider(this.currentTileProvider_, true);
 
 		this.tileCount = 1;
-		SegmentedPlane[] segPlanes_ = {
-				new SegmentedPlane(this.context, 1, 1, 1, false), // 0
-				new SegmentedPlane(this.context, 4, 4, 16, true), // 1
-				new SegmentedPlane(this.context, 6, 6, 8, true), // 2
-				new SegmentedPlane(this.context, 8, 8, 8, true), // 3
-				new SegmentedPlane(this.context, 10, 10, 8, false), // 4
-				new SegmentedPlane(this.context, 32, 32, 8, false) };
-		this.segPlanes_ = segPlanes_;
 
-		String fragmentShaderCode = ShaderBank.getShaderCode("earth-fs.glsl");
-		String vertexShaderCode = ShaderBank.getShaderCode("earth-vs.glsl");
+		String fragmentShaderCode = ShaderBank.getShaderCode(context.activity,"earth-fs.glsl");
+		String vertexShaderCode = ShaderBank.getShaderCode(context.activity,"earth-vs.glsl");
 
 		vertexShaderCode = vertexShaderCode.replace(
 				"%BUFFER_SIDE_FLOAT%",
@@ -127,12 +119,21 @@ public class Earth {
 			throw new Exception("Shader program err: "
 					+ GLES20.glGetProgramInfoLog(shaderProgram));
 		}
-
+		
 		/**
 		 * @type {!we.scene.LocatedProgram}
 		 */
 		this.locatedProgram = new LocatedProgram(shaderProgram, this.context,
 				this.terrain);
+		
+		SegmentedPlane[] segPlanes_ = {
+				new SegmentedPlane(this.context, 1, 1, 1, false), // 0
+				new SegmentedPlane(this.context, 4, 4, 16, true), // 1
+				new SegmentedPlane(this.context, 6, 6, 8, true), // 2
+				new SegmentedPlane(this.context, 8, 8, 8, true), // 3
+				new SegmentedPlane(this.context, 10, 10, 8, false), // 4
+				new SegmentedPlane(this.context, 32, 32, 8, false) };
+		this.segPlanes_ = segPlanes_;
 	}
 
 	private float getBufferSideSize_(boolean opt_terrain) {
