@@ -35,16 +35,16 @@ public class SegmentedPlane extends Mesh {
 	  }
 	  
 	  /** @inheritDoc */
-	  this.vertexBuffer = Utils.createBuffer(vertices_.size()*4);
-	  this.vertexBuffer.buffer.asFloatBuffer().put(Utils.toFloatArray(this.vertices_));
+	  this.vertexBuffer = MyGLUtils.createBuffer(vertices_.size()*4);
+	  this.vertexBuffer.buffer.asFloatBuffer().put(MyGLUtils.toFloatArray(this.vertices_));
 
 	  /** @inheritDoc */
-	  this.texCoordBuffer = Utils.createBuffer(coords_.size()*4);
-	  this.texCoordBuffer.buffer.asFloatBuffer().put(Utils.toFloatArray(this.coords_));
+	  this.texCoordBuffer = MyGLUtils.createBuffer(coords_.size()*4);
+	  this.texCoordBuffer.buffer.asFloatBuffer().put(MyGLUtils.toFloatArray(this.coords_));
 
 	  /** @inheritDoc */
-	  this.indexBuffer = Utils.createBuffer(indices_.size()*2);
-	  this.texCoordBuffer.buffer.asIntBuffer().put(Utils.toIntArray(this.indices_));
+	  this.indexBuffer = MyGLUtils.createBuffer(indices_.size()*2);
+	  this.texCoordBuffer.buffer.asIntBuffer().put(MyGLUtils.toIntArray(this.indices_));
 	  
 	  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.vertexBuffer.bufferId);
 

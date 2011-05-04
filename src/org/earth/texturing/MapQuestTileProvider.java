@@ -1,16 +1,30 @@
 package org.earth.texturing;
 
-public class MapQuestTileProvider extends GenericTileProvider {
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Random;
 
-	private static final String string2 = null;
-	private static final int k = 0;
-	private static final int i = 0;
-	private static final String NAME = "";
-	private static final int j = 0;
+public class MapQuestTileProvider extends OSMTileProvider {
 
 	public MapQuestTileProvider() {
-		super(NAME, string2, i, j, k);
+		super("MapQuest OSM");
 	}
+
+	@Override
+	public URL getTileURL(int zoom, int x, int y) {
+		Random rand = new Random();
+		StringBuffer buff = new StringBuffer();
+		buff.append("http://otile").append(1 +rand.nextInt(3))
+			.append(".mqcdn.com/tiles/1.0.0/osm/").append(zoom).append("/")
+			.append(x).append("/").append(y).append(".png");
+		try {
+			return new URL(buff.toString());
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
 
 
 

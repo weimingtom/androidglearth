@@ -10,7 +10,7 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.util.Log;
 
-public class Utils {
+public class MyGLUtils {
 	private static String TAG = "Utils";
 	
 	public static float[] multMatrix(float[] m1, float[] m2) {
