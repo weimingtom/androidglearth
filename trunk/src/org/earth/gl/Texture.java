@@ -36,17 +36,17 @@ public class Texture {
 		// Setup optional texture parameters
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
 				GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR_MIPMAP_NEAREST);
-		Utils.checkGlError("glTexParameterf GL_TEXTURE_MIN_FILTER");
+		MyGLUtils.checkGlError("glTexParameterf GL_TEXTURE_MIN_FILTER");
 		GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
 				GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-		Utils.checkGlError("glTexParameterf GL_TEXTURE_MAG_FILTER");
+		MyGLUtils.checkGlError("glTexParameterf GL_TEXTURE_MAG_FILTER");
 
 		// Set the texture image
 		GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, tmpBmp, 0);
-		Utils.checkGlError("texImage2D");
+		MyGLUtils.checkGlError("texImage2D");
 
 		GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D);
-		Utils.checkGlError("glGenerateMipmap");
+		MyGLUtils.checkGlError("glGenerateMipmap");
 
 		tmpBmp.recycle();
 		

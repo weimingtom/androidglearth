@@ -1,6 +1,7 @@
 package org.earth.scene;
 
 import org.earth.gl.Context;
+import org.earth.gl.MyGLUtils;
 
 import android.opengl.GLES20;
 import android.util.Log;
@@ -92,9 +93,10 @@ public class LocatedProgram {
 
 	private int getValidatedUniformLocation_(int program, String name) {
 		int result = GLES20.glGetUniformLocation(program, name);
-		if (result == 0) {
-			Log.w(TAG, "Invalid name " + name);
-		}
+		MyGLUtils.checkGlError("glGetUniformLocation");
+//		if (result == 0) {
+//			Log.w(TAG, "Invalid name " + name);
+//		}
 		return result;
 	}
 

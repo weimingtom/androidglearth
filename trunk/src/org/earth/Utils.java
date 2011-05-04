@@ -162,7 +162,8 @@ public class Utils {
 	}
 
 	public static <E> List<E> filter(Collection<E> values, CollectionFilter<E> filter) {
-		return null;
+		// TODO
+		return (List<E>) values;
 	}
 
 	public static <E> E randomElement(E ... elems) {

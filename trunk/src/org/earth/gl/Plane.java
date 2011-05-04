@@ -6,10 +6,10 @@ public class Plane extends Mesh {
 	
 	public Plane(Context context, int width, int height) {
 		 /** @inheritDoc */
-		  this.vertexBuffer = Utils.createBuffer(12*4);
+		  this.vertexBuffer = MyGLUtils.createBuffer(12*4);
 
 		  /** @inheritDoc */
-		  this.texCoordBuffer = Utils.createBuffer(8*4);
+		  this.texCoordBuffer = MyGLUtils.createBuffer(8*4);
 
 		  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.vertexBuffer.bufferId);
 		  

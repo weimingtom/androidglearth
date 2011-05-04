@@ -2,7 +2,7 @@ package org.earth.scene;
 
 import org.earth.geom.Vec3;
 import org.earth.gl.Context;
-import org.earth.gl.Utils;
+import org.earth.gl.MyGLUtils;
 import org.earth.texturing.TileProvider;
 
 public class Scene {
@@ -84,9 +84,9 @@ public class Scene {
 	}
 
 	public float[] getLatLongForXY(float x, float y, boolean opt_radians) {
-		Vec3 orig = Utils.unprojectPoint(x, y, 0, this.context.mvpmInverse,
+		Vec3 orig = MyGLUtils.unprojectPoint(x, y, 0, this.context.mvpmInverse,
 				this.context.viewportWidth, this.context.viewportHeight);
-		Vec3 dir = Utils.unprojectPoint(x, y, 1, this.context.mvpmInverse,
+		Vec3 dir = MyGLUtils.unprojectPoint(x, y, 1, this.context.mvpmInverse,
 				this.context.viewportWidth, this.context.viewportHeight);
 
 		if (orig == null || dir == null)
@@ -135,12 +135,12 @@ public class Scene {
 		Vec3 point = new Vec3((float) Math.sin(lon) * cosy,
 				(float) Math.sin(lat), (float) Math.cos(lon) * cosy);
 		float[] m2 = { point.x, point.y, point.z, 1 };
-		float[] result = Utils.multMatrixVector(this.context.mvpm, m2);
+		float[] result = MyGLUtils.multMatrixVector(this.context.mvpm, m2);
 
 		if (result[3] == 0)
 			return null;
 
-		result = Utils.multMatrixFloat(result, 1 / result[3]);
+		result = MyGLUtils.multMatrixFloat(result, 1 / result[3]);
 
 		/** @type {number} */
 		float x = ((result[0]) + 1) / 2 * this.context.viewportWidth;
@@ -154,7 +154,7 @@ public class Scene {
 				|| y > this.context.viewportHeight) {
 			visibility = 0;
 		} else {
-			Vec3 cameraPos = Utils.unprojectPoint(0.5f, 0.5f, 0,
+			Vec3 cameraPos = MyGLUtils.unprojectPoint(0.5f, 0.5f, 0,
 					this.context.mvpmInverse, 1, 1);
 
 			if (cameraPos == null)

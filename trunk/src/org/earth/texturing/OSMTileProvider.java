@@ -10,6 +10,10 @@ public class OSMTileProvider extends TileProvider {
 	public OSMTileProvider() {
 		super("OpenStreetMaps");
 	}
+	
+	public OSMTileProvider(String name) {
+		super(name);
+	}
 
 	@Override
 	public int getMaxZoomLevel() {

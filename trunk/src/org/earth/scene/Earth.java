@@ -4,7 +4,7 @@ import org.earth.ShaderBank;
 import org.earth.gl.Context;
 import org.earth.gl.SegmentedPlane;
 import org.earth.gl.Shader;
-import org.earth.gl.Utils;
+import org.earth.gl.MyGLUtils;
 import org.earth.texturing.GenericTileProvider;
 import org.earth.texturing.MapQuestTileProvider;
 import org.earth.texturing.TileProvider;
@@ -285,7 +285,7 @@ public class Earth {
 					this.clipStackT_.getOffsets(terrainZoom, 2), 0);
 		}
 
-		float[] mvpm = Utils.transposeMatrix(this.context.flushMVPM());
+		float[] mvpm = MyGLUtils.transposeMatrix(this.context.flushMVPM());
 
 		SegmentedPlane plane = this.segPlanes_[Math.min(zoom,
 				this.segPlanes_.length - 1)];
@@ -314,7 +314,7 @@ public class Earth {
 		// if (Math.floor(goog.now() / 10000) % 2 === 1)
 		agl20.glDrawElements(GLES20.GL_TRIANGLES, plane.numIndices,
 				GLES20.GL_UNSIGNED_SHORT, 0);
-		Utils.checkGlError("glDrawElements");
+		MyGLUtils.checkGlError("glDrawElements");
 		// else
 		// gl.drawElements(gl.LINES, plane.numIndices, gl.UNSIGNED_SHORT, 0);
 	}
