@@ -67,15 +67,19 @@ public class Utils {
 		float[] temp = null;
 		if(elems != null) {
 			// TODO
-			temp = new float[src.length-howmany+elems.length];
+			temp = new float[index+elems.length+Math.abs(src.length-index-howmany)];
 			System.arraycopy(src, 0, temp, 0, index);
 			System.arraycopy(elems, 0, temp, index, elems.length);
-			System.arraycopy(src, index, temp, index+elems.length, src.length-index-howmany);
+			if(Math.abs(src.length-index-howmany)>0) {
+				System.arraycopy(src, index, temp, index+elems.length, Math.abs(src.length-index-howmany));
+			}
 		} else {
 			// TODO
-			temp = new float[src.length-howmany];
+			temp = new float[index+Math.abs(src.length-index-howmany)];
 			System.arraycopy(src, 0, temp, 0, index);
-			System.arraycopy(src, index, temp, index, src.length-index-howmany);
+			if(Math.abs(src.length-index-howmany)>0) {
+				System.arraycopy(src, index, temp, index, Math.abs(src.length-index-howmany));
+			}
 		}
 		return temp;
 	}
