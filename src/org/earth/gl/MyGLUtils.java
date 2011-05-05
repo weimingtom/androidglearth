@@ -76,10 +76,37 @@ public class MyGLUtils {
 		return tmp;
 	}
 
-	public static Vec3 unprojectPoint(float x, float y, int i,
-			float[] mvpmInverse, int viewportWidth, int viewportHeight) {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 *
+	 * @param {number} x Screen-space coordinate X.
+	 * @param {number} y Screen-space coordinate Y.
+	 * @param {number} z Screen-space coordinate Z (depth).
+	 * @param {goog.math.Matrix} invertedMVP Inverted ModelView-Projections matrix.
+	 * @param {number} viewportWidth Width of viewport in pixels.
+	 * @param {number} viewportHeight Height of viewport in pixels.
+	 * @return {?goog.math.Vec3} Point location in model-space.
+	 */
+	public static Vec3 unprojectPoint(float x, float y, int z,
+			float[] invertedMVP, int viewportWidth, int viewportHeight) {
+		 if (invertedMVP == null)
+			    return null;
+		
+		 float [] m2 = {x / viewportWidth * 2 - 1,
+		    1 - 2 * y / viewportHeight, //Y axis has to be flipped
+		    z * 2 - 1, 1};
+		  /**
+		   * @type {goog.math.Matrix}
+		   */
+		  float[] result = multMatrix(invertedMVP, m2);
+		
+		  if (result[3] == 0)
+		    return null;
+		
+		  result = multMatrixFloat(result,1 / result[3]);
+		
+		  return new Vec3(/** @type {number} */  result[0],
+		                        /** @type {number} */ result[1],
+		                        /** @type {number} */ result[2]);
 	}
 
 	public static float[] multMatrixFloat(float[] result, float f) {
