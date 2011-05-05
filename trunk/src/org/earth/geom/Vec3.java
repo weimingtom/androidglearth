@@ -23,7 +23,7 @@ public class Vec3 implements Cloneable {
 	}
 
 	public Vec3 normalize() {
-		return this.scale(1 / this.magnitude());
+		return this.scale((float)1 / this.magnitude());
 	}
 
 	public Vec3 scale(float s) {

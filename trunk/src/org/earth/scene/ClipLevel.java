@@ -143,7 +143,7 @@ public class ClipLevel {
 						this.metaBuffer[i] = Utils.splice(this.metaBuffer[i],
 								0, diffX);
 						this.metaBuffer[i] = Utils.push(this.metaBuffer[i],
-								diffX);
+								new float [diffX]);
 					}
 				}
 				// TODO
@@ -152,14 +152,15 @@ public class ClipLevel {
 						Utils.splice(this.metaBuffer[i], this.side_ + diffX,
 								-diffX);
 						this.metaBuffer[i] = Utils.unshift(this.metaBuffer[i],
-								-diffX);
+								new float [-diffX]);
 					}
 				}
 				if (diffY > 0) {
 					for (int i = 0; i < diffY; ++i) {
 						this.metaBuffer = Utils.shift(float[].class,
 								this.metaBuffer);
-						float[] tmp = { this.side_ };
+						// TODO
+						float[] tmp = new float[this.side_];
 						this.metaBuffer = Utils.push(float[].class,
 								this.metaBuffer, tmp);
 					}
@@ -168,7 +169,8 @@ public class ClipLevel {
 					for (int i = 0; i < -diffY; ++i) {
 						this.metaBuffer = Utils.pop(float[].class,
 								this.metaBuffer);
-						float[] tmp = { this.side_ };
+						// TODO
+						float[] tmp = new float[this.side_];
 						this.metaBuffer = Utils.unshift(float[].class,
 								this.metaBuffer, tmp);
 					}
@@ -216,7 +218,7 @@ public class ClipLevel {
 		int centerOffset = (this.degenerated_ ? this.tileCount_ : this.side_) / 2;
 		x += centerOffset;
 		y += centerOffset;
-		if (this.metaBuffer[y]!=null && this.metaBuffer[y][x] != 1.0f) { // loaded -> dont touch it !
+		if (this.metaBuffer[y]!=null || this.metaBuffer[y][x] != 1.0f) { // loaded -> dont touch it !
 			this.needTile_(this.offX + x, this.offY + y, batchTime);
 		}
 	}
@@ -301,7 +303,7 @@ public class ClipLevel {
 
 		GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0, xPos, yPos, tile.image);
 
-		this.metaBuffer[y][x] = 1;
+		this.metaBuffer[y][x] = 1.0f;
 	}
 
 	public int getBufferRequestCount() {
