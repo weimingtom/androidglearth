@@ -43,7 +43,7 @@ public class SegmentedPlane extends Mesh {
 
 	  /** @inheritDoc */
 	  this.indexBuffer = MyGLUtils.createBuffer(indices_.size()*4);
-	  this.texCoordBuffer.buffer.asIntBuffer().put(MyGLUtils.toIntArray(this.indices_));
+	  this.indexBuffer.buffer.asIntBuffer().put(MyGLUtils.toIntArray(this.indices_));
 	  
 	  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.vertexBuffer.bufferId);
 	  GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.vertexBuffer.buffer.capacity(),
@@ -60,7 +60,7 @@ public class SegmentedPlane extends Mesh {
 	  this.texCoordBuffer.numItems = 4;
 
 	  // TODO
-	  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.indexBuffer.bufferId);
+	  GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, this.indexBuffer.bufferId);
 	  GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, this.indexBuffer.buffer.capacity(),
 			  this.indexBuffer.buffer.asIntBuffer(), GLES20.GL_STATIC_DRAW);
 	  MyGLUtils.checkGlError("glBufferData");
