@@ -86,13 +86,13 @@ public class MyGLUtils {
 	 * @param {number} viewportHeight Height of viewport in pixels.
 	 * @return {?goog.math.Vec3} Point location in model-space.
 	 */
-	public static Vec3 unprojectPoint(float x, float y, int z,
+	public static Vec3 unprojectPoint(float x, float y, float z,
 			float[] invertedMVP, int viewportWidth, int viewportHeight) {
 		 if (invertedMVP == null)
 			    return null;
 		
-		 float [] m2 = {x / viewportWidth * 2 - 1,
-		    1 - 2 * y / viewportHeight, //Y axis has to be flipped
+		 float [] m2 = {x / (float)(viewportWidth * 2 - 1),
+			(float)(1 - 2 * y) / (float)viewportHeight, //Y axis has to be flipped
 		    z * 2 - 1, 1};
 		  /**
 		   * @type {goog.math.Matrix}
