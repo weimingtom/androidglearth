@@ -11,15 +11,14 @@ public class SegmentedPlane extends Mesh {
 	private ArrayList<Integer> indices_;
 
 	public SegmentedPlane(Context context, int width, int height, int subdiv, boolean opt_nolod) {
-		// TODO Auto-generated constructor stub
 		this.vertices_ = new ArrayList<Float>();
 		this.coords_ =  new ArrayList<Float>();
 		this.indices_ = new ArrayList<Integer>();
 		
 		//this.generateTile_(0,0,subdiv,[false,true,false,false]);
-	  for (int x = -width / 2; x < width / 2; ++x)
+	  for (float x = ((float)-width) / 2; x < width / 2; ++x)
 	  {
-	    for (int y = -height / 2; y < height / 2; ++y)
+	    for (float y = ((float)-height) / 2; y < height / 2; ++y)
 	    {
 	    	int thisSubdiv = calcSubdiv(opt_nolod, subdiv, x, y);
 	      boolean [] doubles = {y + 1 < height / 2 &&
@@ -47,34 +46,40 @@ public class SegmentedPlane extends Mesh {
 	  this.texCoordBuffer.buffer.asIntBuffer().put(MyGLUtils.toIntArray(this.indices_));
 	  
 	  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.vertexBuffer.bufferId);
-
 	  GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.vertexBuffer.buffer.capacity(),
 			  this.vertexBuffer.buffer, GLES20.GL_STATIC_DRAW);
+	  MyGLUtils.checkGlError("glBufferData");
 	  this.vertexBuffer.itemSize = 2;
+	  this.vertexBuffer.numItems = 4;
 
 	  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.texCoordBuffer.bufferId);
 	  GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.texCoordBuffer.buffer.capacity(),
 			  this.texCoordBuffer.buffer, GLES20.GL_STATIC_DRAW);
+	  MyGLUtils.checkGlError("glBufferData");
 	  this.texCoordBuffer.itemSize = 2;
+	  this.texCoordBuffer.numItems = 4;
 
 	  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.indexBuffer.bufferId);
 	  GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, this.indexBuffer.buffer.capacity(),
 			  this.indexBuffer.buffer, GLES20.GL_STATIC_DRAW);
+	  MyGLUtils.checkGlError("glBufferData");
+	  this.indexBuffer.itemSize = 2;
+	  this.indexBuffer.numItems = 4;
 
 	  /** @inheritDoc */
 	  this.numIndices = this.indices_.size();
 	}
 	
-	private void generateTile_(int offX, int offY, int subdiv, boolean[] doubles) {
+	private void generateTile_(float offX, float offY, int subdiv, boolean[] doubles) {
 		  /** @type {number} */
 		  int offIndices = this.vertices_.size() / 2;
 
 		  for (int y = 0; y <= subdiv; ++y) {
 		    for (int x = 0; x <= subdiv; ++x) {
-		      this.vertices_.add((float)offX + x / subdiv);
-		      this.vertices_.add((float)offY + y / subdiv);
+		      this.vertices_.add(offX + x / subdiv);
+		      this.vertices_.add(offY + y / subdiv);
 		      this.coords_.add((float)x / subdiv);
-		      this.coords_.add((float)1 - y / subdiv);
+		      this.coords_.add((float)(1 - y) / subdiv);
 		    }
 		  }
 
@@ -188,15 +193,22 @@ public class SegmentedPlane extends Mesh {
 	}
 
 	private void finishTriangle() {
-		// TODO Auto-generated method stub
-		
+		 /*
+	    // Useful for debugging - Uncomment this if you want to render
+	    // this segplane as gl.LINES instead of gl.TRIANGLES
+	    // (gets compiled-out if commented)
+	    var last = this.indices_.pop();
+	    var prelast = this.indices_.pop();
+	    var preprelast = this.indices_.pop();
+	    this.indices_.push(preprelast, prelast, prelast, last, last, preprelast);
+	    */
 	}
 
 	public int nearestLowerPOT(float num) {
 		return (int) Math.max(1, Math.pow(2, Math.ceil(Math.log(num) / org.earth.Utils.LN2)));
 	}
 	
-	public int calcSubdiv(boolean nolod, int subdiv, int x, int y) {
+	public int calcSubdiv(boolean nolod, int subdiv, float x, float y) {
 		return nolod ? subdiv :
 	        nearestLowerPOT((float) (subdiv / Math.max(1, Math.sqrt(x * x + y * y))));
 	}

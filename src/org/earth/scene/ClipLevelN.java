@@ -30,8 +30,8 @@ public class ClipLevelN {
 
 		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
 		// GLES20.glPixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
-		GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, tileSize
-				* tileCount, tileSize * tileCount, 0, GLES20.GL_RGBA,
+		GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGB, tileSize
+				* tileCount, tileSize * tileCount, 0, GLES20.GL_RGB,
 				GLES20.GL_UNSIGNED_BYTE, null);
 		GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,
 				GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
