@@ -101,10 +101,6 @@ public class ClipLevel {
 	 */
 	private void resetMeta_() {
 		this.metaBuffer = new float[side_][side_];
-		for (int y = 0; y < this.side_; ++y) {
-			float[] array = { this.side_ };
-			this.metaBuffer[y] = array;
-		}
 	}
 
 	/**
