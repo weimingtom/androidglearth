@@ -102,7 +102,7 @@ public class Context {
 		  this.viewportWidth = this.canvas.getWidth() ;
 		  this.viewportHeight = this.canvas.getHeight();
 		  GLES20.glViewport(0, 0, this.viewportWidth, this.viewportHeight);
-		  this.aspectRatio = this.viewportWidth / this.viewportHeight;
+		  this.aspectRatio = (float)this.viewportWidth / (float)this.viewportHeight;
 		  this.setPerspectiveInternal_();
 		  this.scene.recalcTilesVertically();
 	}
