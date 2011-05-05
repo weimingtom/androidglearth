@@ -97,7 +97,7 @@ public class MyGLUtils {
 		  /**
 		   * @type {goog.math.Matrix}
 		   */
-		  float[] result = multMatrix(invertedMVP, m2);
+		  float[] result = multMatrixVector(invertedMVP, m2);
 		
 		  if (result[3] == 0)
 		    return null;

@@ -1,6 +1,6 @@
 package org.earth.geom;
 
-public class Vec3 implements Cloneable{
+public class Vec3 implements Cloneable {
 	public float x;
 	public float y;
 	public float z;
@@ -42,29 +42,38 @@ public class Vec3 implements Cloneable{
 		return new Vec3(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y
 				- a.y * b.x);
 	}
-	
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 
 	public Vec3 invert() {
-		// TODO Auto-generated method stub
-		return null;
+		this.x = -this.x;
+		this.y = -this.y;
+		this.z = -this.z;
+		return this;
 	}
 
-	public static float dot(Vec3 direction, Vec3 sphereCenter) {
-		// TODO Auto-generated method stub
-		return 0;
+	/**
+	 * Returns the scalar product of vectors v0 and v1.
+	 * 
+	 * @param {goog.vec.ArrayType} v0 The first vector.
+	 * @param {goog.vec.ArrayType} v1 The second vector.
+	 * @return {number} The scalar product.
+	 */
+	public static float dot(Vec3 v0, Vec3 v1) {
+		return v0.x * v1.x + v0.y * v1.y + v0.z * v1.z;
 	}
 
 	public static Vec3 sum(Vec3 orig, Vec3 scale) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Vec3(orig.x + scale.x, orig.y + scale.y, orig.z + scale.z);
 	}
 
-	public static float distance(Vec3 point, Vec3 cameraPos) {
-		// TODO Auto-generated method stub
-		return 0;
+	public static float distance(Vec3 a, Vec3 b) {
+		float dx = a.x - b.x;
+		float dy = a.y - b.y;
+		float dz = a.z - b.z;
+		return (float) Math.sqrt(dx * dx + dy * dy + dz * dz);
 	}
 }
