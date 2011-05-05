@@ -220,7 +220,7 @@ public class ClipLevel {
 		int centerOffset = (this.degenerated_ ? this.tileCount_ : this.side_) / 2;
 		x += centerOffset;
 		y += centerOffset;
-		if (this.metaBuffer[y][x] != 1) { // loaded -> dont touch it !
+		if (this.metaBuffer[y]!=null && this.metaBuffer[y][x] != 1.0f) { // loaded -> dont touch it !
 			this.needTile_(this.offX + x, this.offY + y, batchTime);
 		}
 	}

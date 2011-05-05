@@ -59,7 +59,6 @@ public class SegmentedPlane extends Mesh {
 	  this.texCoordBuffer.itemSize = 2;
 	  this.texCoordBuffer.numItems = 4;
 
-	  // TODO
 	  GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, this.indexBuffer.bufferId);
 	  GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, this.indexBuffer.buffer.capacity(),
 			  this.indexBuffer.buffer.asIntBuffer(), GLES20.GL_STATIC_DRAW);
