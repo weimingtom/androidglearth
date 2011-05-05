@@ -3,11 +3,11 @@ package org.earth;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -20,7 +20,6 @@ public class Utils {
 	}
 
 	public static float modulo(float a, float b) {
-		// TODO
 		return a % b;
 	}
 
@@ -162,8 +161,16 @@ public class Utils {
 	}
 
 	public static <E> List<E> filter(Collection<E> values, CollectionFilter<E> filter) {
-		// TODO
-		return (List<E>) values;
+		ArrayList<E> tmp = new ArrayList<E>();
+		
+		int i = 0;
+		for(E value : values) {
+			if(filter.filter(value, i, values)) {
+				tmp.add(value);
+			}
+			i++;
+		}
+		return tmp;
 	}
 
 	public static <E> E randomElement(E ... elems) {
@@ -171,9 +178,11 @@ public class Utils {
 		return elems[rand.nextInt(elems.length-1)];
 	}
 
-	public static <E> E[] pop(Class<E> class1, E[] metaBuffer) {
-		// TODO Auto-generated method stub
-		return null;
+	public static <E> E[] pop(Class<E> c, E[] src) {
+		@SuppressWarnings("unchecked")
+		E[] temp = (E[]) Array.newInstance(c, src.length-1);
+		System.arraycopy(src, 0, temp, 0, temp.length);
+		return temp;
 	}
 
     /** read an asset file as Text File and return a string */

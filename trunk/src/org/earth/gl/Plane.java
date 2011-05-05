@@ -1,5 +1,7 @@
 package org.earth.gl;
 
+import org.earth.Utils;
+
 import android.opengl.GLES20;
 
 public class Plane extends Mesh {
@@ -28,6 +30,7 @@ public class Plane extends Mesh {
 			  vertexBuffer.buffer,
 		      GLES20.GL_STATIC_DRAW
 		  );
+		  MyGLUtils.checkGlError("glBufferData");
 		  this.vertexBuffer.itemSize = 3;
 		  this.vertexBuffer.numItems = 4;
 
@@ -49,6 +52,7 @@ public class Plane extends Mesh {
 			texCoordBuffer.buffer,
 			GLES20.GL_STATIC_DRAW
 		  );
+		  MyGLUtils.checkGlError("glBufferData");
 		  this.texCoordBuffer.itemSize = 2;
 		  this.texCoordBuffer.numItems = 4;
 	}
