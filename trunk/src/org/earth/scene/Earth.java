@@ -65,7 +65,7 @@ public class Earth {
 			this.currentTileProvider_ = new MapQuestTileProvider();
 		}
 		this.clipStackA_ = new ClipStack(this.currentTileProvider_,
-				this.context, 4, 3, 1, 19);
+				this.context, 2, 3, 1, 19);
 		this.terrain = TERRAIN && this.context.isVTFSupported();
 
 		if (this.terrain) {

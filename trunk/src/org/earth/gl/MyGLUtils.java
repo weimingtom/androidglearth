@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.earth.geom.Vec3;
 
 import android.opengl.GLES20;
+import android.opengl.GLU;
 import android.opengl.Matrix;
 import android.util.Log;
 
@@ -47,8 +48,9 @@ public class MyGLUtils {
 	public static void checkGlError(String op) {
 		int error;
 		while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
-			Log.e(TAG, op + ": glError " + error);
-			throw new RuntimeException(op + ": glError " + error);
+			String errorStr = GLU.gluErrorString(error);
+			Log.e(TAG, op + ": glError " + error + " " + errorStr);
+			throw new RuntimeException(op + ": glError " + error + " " + errorStr);
 		}
 	}
 
