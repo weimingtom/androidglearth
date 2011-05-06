@@ -132,8 +132,10 @@ public class MyGLUtils {
 	}
 	
 	public static void runGlRunnables() {
+		// TODO
 		for(Runnable runnable : glRunnables) {
 			runnable.run();
 		}
+		glRunnables.clear();
 	}
 }
