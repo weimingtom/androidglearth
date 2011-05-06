@@ -313,7 +313,7 @@ public class Earth {
 				plane.indexBuffer.bufferId);
 		// if (Math.floor(goog.now() / 10000) % 2 === 1)
 		agl20.glDrawElements(GLES20.GL_TRIANGLES, plane.numIndices,
-				GLES20.GL_UNSIGNED_SHORT, 0);
+				GLES20.GL_INT, 0);
 		MyGLUtils.checkGlError("glDrawElements");
 		// else
 		// gl.drawElements(gl.LINES, plane.numIndices, gl.UNSIGNED_SHORT, 0);
