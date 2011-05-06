@@ -146,7 +146,6 @@ public class ClipLevel {
 								new float [diffX]);
 					}
 				}
-				// TODO
 				if (diffX < 0) {
 					for (int i = 0; i < this.side_; ++i) {
 						Utils.splice(this.metaBuffer[i], this.side_ + diffX,
@@ -159,7 +158,6 @@ public class ClipLevel {
 					for (int i = 0; i < diffY; ++i) {
 						this.metaBuffer = Utils.shift(float[].class,
 								this.metaBuffer);
-						// TODO
 						float[] tmp = new float[this.side_];
 						this.metaBuffer = Utils.push(float[].class,
 								this.metaBuffer, tmp);
@@ -169,7 +167,6 @@ public class ClipLevel {
 					for (int i = 0; i < -diffY; ++i) {
 						this.metaBuffer = Utils.pop(float[].class,
 								this.metaBuffer);
-						// TODO
 						float[] tmp = new float[this.side_];
 						this.metaBuffer = Utils.unshift(float[].class,
 								this.metaBuffer, tmp);

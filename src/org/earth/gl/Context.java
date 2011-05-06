@@ -118,19 +118,19 @@ public class Context {
 			0, 0, 1, z,
 			0, 0, 0, 1
 		};
-		MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
+		this.modelViewMatrix = MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
 	}
 	
 	public void rotate(float angle, float x, float y, float z) {
 		float c = (float) Math.cos(angle);
 		float s = (float) Math.sin(angle);
 		float [] mmmatrix = {
-			x * x * (1 - c) + c, x * y * (1 - c) - z * s, x * z * (1 - c) + y * s, 0,
-			y * x * (1 - c) + z * s, y * y * (1 - c) + c, y * z * (1 - c) - x * s, 0,
-			z * x * (1 - c) - y * s, z * y * (1 - c) + x * s, z * z * (1 - c) + c, 0,
-			0, 0, 0, 1
+			x * x * (1.0f - c) + c, x * y * (1.0f - c) - z * s, x * z * (1.0f - c) + y * s, 0,
+			y * x * (1.0f - c) + z * s, y * y * (1.0f - c) + c, y * z * (1.0f - c) - x * s, 0,
+			z * x * (1.0f - c) - y * s, z * y * (1.0f - c) + x * s, z * z * (1.0f - c) + c, 0,
+			0, 0, 0, 1.0f
 		};
-		MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
+		this.modelViewMatrix = MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
 	}
 	
 	public void rotate010(float angle) {
@@ -142,7 +142,7 @@ public class Context {
 			-s, 0, c, 0,
 			0, 0, 0, 1
 		};
-		MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
+		this.modelViewMatrix = MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
 	}
 	
 	public void rotate100(float angle) {
@@ -154,7 +154,7 @@ public class Context {
 			0, s, c, 0,
 			0, 0, 0, 1
 		};
-		MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
+		this.modelViewMatrix = MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
 	}
 	
 	public void rotate001(float angle) {
@@ -166,7 +166,7 @@ public class Context {
 			0, 0, 1, 0,
 			0, 0, 0, 1
 		};
-		MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
+		this.modelViewMatrix = MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
 	}
 	
 	public void lookAt(Vec3 eye, Vec3 center, Vec3 up) {
@@ -181,7 +181,7 @@ public class Context {
 			-fw.x, -fw.y, -fw.z, 0, //eye.z * (fw.x + fw.y + fw.z)
 			0, 0, 0, 1
 		};
-		MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
+		this.modelViewMatrix = MyGLUtils.multMatrix(this.modelViewMatrix,mmmatrix);
 		
 		this.translate(-eye.x, -eye.y, -eye.z);
 	}
