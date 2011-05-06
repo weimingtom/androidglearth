@@ -33,7 +33,8 @@ public class ClipLevelN {
 		// GLES20.glPixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
 		GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGB, tileSize
 				* tileCount, tileSize * tileCount, 0, GLES20.GL_RGB,
-				GLES20.GL_UNSIGNED_BYTE, null);
+				GLES20.GL_UNSIGNED_SHORT_5_6_5, null);
+		MyGLUtils.checkGlError("glTexImage2D");
 		GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,
 				GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
 		GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D,
@@ -55,10 +56,12 @@ public class ClipLevelN {
 	public void handleLoadedTile(Tile tile) {
 		try {
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
+			System.out.println("Format "+GLUtils.getInternalFormat(tile.image));
+			System.out.println("Type "+GLUtils.getType(tile.image));
 			GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0,
-					tile.x * tileSize, (tileCount - tile.y - 1) * tileSize, tile.image,
-					GLES20.GL_RGB, GLES20.GL_UNSIGNED_BYTE );	
+					tile.x * tileSize, (tileCount - tile.y - 1) * tileSize, tile.image, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
 			MyGLUtils.checkGlError("texSubImage2D");
+			tile.image.recycle();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

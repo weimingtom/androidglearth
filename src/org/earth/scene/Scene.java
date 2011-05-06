@@ -22,6 +22,7 @@ public class Scene {
 			TileProvider opt_tileProvider, boolean opt_copyright)
 			throws Exception {
 		this.context = context;
+		this.context.scene = this;
 		this.infobox_ = opt_infobox;
 		this.tpCopyrightElement_ = opt_copyrightbox;
 		this.tpLogoImg_ = opt_logobox;

@@ -44,7 +44,6 @@ public class GLES20Renderer implements GLSurfaceView.Renderer {
     	context = new Context(mActivity, mGLSurfaceView, null);
     	try {
 			scene = new Scene(context, false, false, false, null, false);
-			context.scene = scene;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

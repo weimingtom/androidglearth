@@ -298,7 +298,7 @@ public class ClipLevel {
 		int yPos = (this.side_ - (y + this.offY % this.side_) - 1)
 				* tileSize;
 
-		GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0, xPos, yPos, tile.image);
+		GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0, xPos, yPos, tile.image, GLES20.GL_RGB565, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
 
 		this.metaBuffer[y][x] = 1.0f;
 	}
