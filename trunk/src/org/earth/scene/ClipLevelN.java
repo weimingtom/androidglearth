@@ -1,6 +1,7 @@
 package org.earth.scene;
 
 import org.earth.gl.Context;
+import org.earth.gl.MyGLUtils;
 import org.earth.texturing.Tile;
 import org.earth.texturing.TileProvider;
 
@@ -52,10 +53,16 @@ public class ClipLevelN {
 
 	// TODO
 	public void handleLoadedTile(Tile tile) {
-		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
-		GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0,
-				tile.x * tileSize, (tileCount - tile.y - 1) * tileSize, tile.image,
-				GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE );	
+		try {
+			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
+			GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0,
+					tile.x * tileSize, (tileCount - tile.y - 1) * tileSize, tile.image,
+					GLES20.GL_RGB, GLES20.GL_UNSIGNED_BYTE );	
+			MyGLUtils.checkGlError("texSubImage2D");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	// TODO
