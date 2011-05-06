@@ -162,7 +162,7 @@ public class ClipStack {
 	public float[] getOffsets(int zoomLevel, int count) {
 		if (zoomLevel > this.maxLevel_)
 			Log.w(TAG, "zoomLevel too high");
-		float[] result = new float[count];
+		float[] result = new float[count*2];
 		int n = 0;
 		for (int i = zoomLevel - this.minLevel_; i > zoomLevel - this.minLevel_
 				- count; --i) {
