@@ -100,6 +100,7 @@ public class Utils {
 			@SuppressWarnings("unchecked")
 			E[] temp = (E[]) Array.newInstance(c,src.length+elems.length);
 			System.arraycopy(src, 0, temp, 0, src.length);
+			System.arraycopy(elems, 0, temp, src.length, elems.length);
 			return temp;
 		} else {
 			return src;
