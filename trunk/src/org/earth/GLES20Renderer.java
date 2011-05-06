@@ -4,6 +4,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.earth.gl.Context;
+import org.earth.gl.MyGLUtils;
 import org.earth.scene.Scene;
 
 import android.app.Activity;
@@ -37,6 +38,8 @@ public class GLES20Renderer implements GLSurfaceView.Renderer {
         mTimer.logFPS();
         
         scene.draw();
+        
+        MyGLUtils.runGlRunnables();
     }
 
     @Override

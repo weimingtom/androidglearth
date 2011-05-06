@@ -56,14 +56,18 @@ public class ClipLevelN {
 	public void handleLoadedTile(Tile tile) {
 		try {
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
+			MyGLUtils.checkGlError("glBindTexture");
+			
 			System.out.println("Format "+GLUtils.getInternalFormat(tile.image));
 			System.out.println("Type "+GLUtils.getType(tile.image));
+			
 			GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0,
 					tile.x * tileSize, (tileCount - tile.y - 1) * tileSize, tile.image, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
 			MyGLUtils.checkGlError("texSubImage2D");
 			tile.image.recycle();
 		} catch (Exception e) {
 			e.printStackTrace();
+			tile.onerror(tileprovider);
 		}
 		
 	}
@@ -76,7 +80,16 @@ public class ClipLevelN {
 			public void onload(TileProvider tileprovider) {
 				if (!GLES20.glIsTexture(texture))
 					return; // late tile
-				handleLoadedTile(this);
+				
+				final Tile t =this;
+				
+				MyGLUtils.runOnGlThread(new Runnable() {
+					@Override
+					public void run() {
+						handleLoadedTile(t);
+					}
+				});
+				
 			}
 
 			@Override

@@ -3,6 +3,7 @@ package org.earth.gl;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.earth.geom.Vec3;
 
@@ -123,5 +124,16 @@ public class MyGLUtils {
 		float[] mTrans = new float[m.length];
 		Matrix.transposeM(mTrans, 0, m, 0);
 		return m;
+	}
+
+	private static CopyOnWriteArrayList<Runnable> glRunnables = new CopyOnWriteArrayList<Runnable>();
+	public static void runOnGlThread(Runnable runnable) {
+		glRunnables.add(runnable);
+	}
+	
+	public static void runGlRunnables() {
+		for(Runnable runnable : glRunnables) {
+			runnable.run();
+		}
 	}
 }
