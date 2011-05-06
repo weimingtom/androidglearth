@@ -69,10 +69,11 @@ public abstract class Tile implements Comparable<Tile> {
 						try {
 							is.close();
 						} catch (IOException e) {
-							// Ignore.
+							e.printStackTrace();
 						}
 					}
 				} catch (Exception e) {
+					e.printStackTrace();
 					onerror(tileprovider);
 					return;
 				}
