@@ -17,16 +17,14 @@ public class MyGLUtils {
 		// TODO
 		float[] m3 = new float[16];
 		Matrix.multiplyMM(m3, 0, m1, 0, m2, 0);
-		m1 = m3;
-		return m1;
+		return m3;
 	}
 
 	public static float[] multMatrixVector(float[] m1, float[] m2) {
 		// TODO
 		float[] m3 = new float[16];
 		Matrix.multiplyMV(m3, 0, m1, 0, m2, 0);
-		m1 = m3;
-		return m1;
+		return m3;
 	}
 
 	public static float[] inverseMatrix(float[] m1) {
@@ -102,7 +100,7 @@ public class MyGLUtils {
 		if (result[3] == 0)
 			return null;
 
-		result = multMatrixFloat(result, 1 / result[3]);
+		result = multMatrixFloat(result, 1.0f / result[3]);
 
 		return new Vec3(/** @type {number} */
 		result[0],

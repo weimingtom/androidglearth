@@ -47,24 +47,20 @@ public class SegmentedPlane extends Mesh {
 	  
 	  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.vertexBuffer.bufferId);
 	  GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.vertexBuffer.buffer.capacity(),
-			  this.vertexBuffer.buffer.asFloatBuffer(), GLES20.GL_STATIC_DRAW);
+			  this.vertexBuffer.buffer, GLES20.GL_STATIC_DRAW);
 	  MyGLUtils.checkGlError("glBufferData");
 	  this.vertexBuffer.itemSize = 2;
-	  this.vertexBuffer.numItems = 4;
 
 	  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.texCoordBuffer.bufferId);
 	  GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.texCoordBuffer.buffer.capacity(),
-			  this.texCoordBuffer.buffer.asFloatBuffer(), GLES20.GL_STATIC_DRAW);
+			  this.texCoordBuffer.buffer, GLES20.GL_STATIC_DRAW);
 	  MyGLUtils.checkGlError("glBufferData");
 	  this.texCoordBuffer.itemSize = 2;
-	  this.texCoordBuffer.numItems = 4;
 
 	  GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, this.indexBuffer.bufferId);
 	  GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, this.indexBuffer.buffer.capacity(),
-			  this.indexBuffer.buffer.asIntBuffer(), GLES20.GL_STATIC_DRAW);
+			  this.indexBuffer.buffer, GLES20.GL_STATIC_DRAW);
 	  MyGLUtils.checkGlError("glBufferData");
-	  this.indexBuffer.itemSize = 2;
-	  this.indexBuffer.numItems = 4;
 
 	  /** @inheritDoc */
 	  this.numIndices = this.indices_.size();

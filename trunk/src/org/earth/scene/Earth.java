@@ -296,21 +296,29 @@ public class Earth {
 		agl20.glVertexAttribPointer(
 				this.locatedProgram.vertexPositionAttribute,
 				plane.vertexBuffer.itemSize, GLES20.GL_FLOAT, false, 0, 0);
+		MyGLUtils.checkGlError("glVertexAttribPointer");
 
 		GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,
 				plane.texCoordBuffer.bufferId);
 		agl20.glVertexAttribPointer(this.locatedProgram.textureCoordAttribute,
 				plane.texCoordBuffer.itemSize, GLES20.GL_FLOAT, false, 0, 0);
+		MyGLUtils.checkGlError("glVertexAttribPointer");
 
+		// TODO
 		GLES20.glUniformMatrix4fv(this.locatedProgram.mvpMatrixUniform,
-				mvpm.length, false, mvpm, 0);
+				1, false, mvpm, 0);
+		MyGLUtils.checkGlError("glUniformMatrix4fv");
+		
 		GLES20.glUniform1f(this.locatedProgram.tileCountUniform, this.tileCount);
+		MyGLUtils.checkGlError("glUniform1f");
 
 		GLES20.glUniform2fv(this.locatedProgram.offsetUniform,
-				this.offset.length, this.offset, 0);
+				1, this.offset, 0);
+		MyGLUtils.checkGlError("glUniform2fv");
 
 		GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER,
 				plane.indexBuffer.bufferId);
+		MyGLUtils.checkGlError("glBindBuffer");
 		// if (Math.floor(goog.now() / 10000) % 2 === 1)
 		agl20.glDrawElements(GLES20.GL_TRIANGLES, plane.numIndices,
 				GLES20.GL_INT, 0);
