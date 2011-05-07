@@ -80,6 +80,12 @@ public class Context {
 		return arr[0] != 0;
 	}
 
+	/**
+	 * Calculates projection matrix to represent desired perspective projection
+	 * @param {number} fovy Field-of-view in degrees.
+	 * @param {number} zNear Z-near plane.
+	 * @param {number} zFar Z-far plane.
+	 */
 	public void setPerspective(float fovy, float zNear, float zFar) {
 		this.fov = (float) Math.toRadians(fovy);
 		this.zNear_ = zNear;
@@ -89,6 +95,10 @@ public class Context {
 		this.setPerspectiveInternal_();
 	}
 
+	/**
+	 * Calculates projection matrix to represent desired perspective projection
+	 * @private
+	 */
 	private void setPerspectiveInternal_() {
 		float f = (float) (1.0f / Math.tan(this.fov / 2.0f));
 		float[] tmp = { f / this.aspectRatio, 0.0f, 0.0f, 0.0f, 0.0f, f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -98,6 +108,9 @@ public class Context {
 		this.projectionMatrix = tmp;
 	}
 	
+	/**
+	 * Changes context's state to reflect canvas's size change.
+	 */
 	public void resize() {
 		  this.viewportWidth = this.canvas.getWidth() ;
 		  this.viewportHeight = this.canvas.getHeight();
@@ -107,10 +120,19 @@ public class Context {
 		  this.scene.recalcTilesVertically();
 	}
 	
+	/**
+	 * Loads 4x4 identity matrix as current model-view matrix
+	 */
 	private void loadIdentity() {
 		Matrix.setIdentityM(modelViewMatrix, 0);
 	}
 	
+	/**
+	 * Multiplies current model-view matrix to represent translation by (x,y,z)
+	 * @param {number} x X translation.
+	 * @param {number} y Y translation.
+	 * @param {number} z Z translation.
+	 */
 	public void translate(float x, float y, float z) {
 		float [] mmmatrix = {
 			1, 0, 0, x,
