@@ -141,7 +141,7 @@ public class MyGLUtils {
 	public static float[] transposeMatrix(float[] m) {
 		float[] mTrans = new float[m.length];
 		Matrix.transposeM(mTrans, 0, m, 0);
-		return m;
+		return mTrans;
 	}
 
 	private static CopyOnWriteArrayList<Runnable> glRunnables = new CopyOnWriteArrayList<Runnable>();

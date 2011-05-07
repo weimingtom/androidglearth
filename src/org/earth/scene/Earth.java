@@ -286,6 +286,7 @@ public class Earth {
 					this.clipStackT_.getOffsets(terrainZoom, 2), 0);
 		}
 
+		// TODO
 		float[] mvpm = MyGLUtils.transposeMatrix(this.context.flushMVPM());
 
 		SegmentedPlane plane = this.segPlanes_[Math.min(zoom,
