@@ -24,7 +24,7 @@ public class MyGLUtils {
 
 	public static float[] multMatrixVector(float[] m1, float[] m2) {
 		// TODO
-		float[] m3 = new float[16];
+		float[] m3 = new float[4];
 		Matrix.multiplyMV(m3, 0, m1, 0, m2, 0);
 		return m3;
 	}
@@ -91,8 +91,8 @@ public class MyGLUtils {
 		if (invertedMVP == null)
 			return null;
 
-		float[] m2 = { x / (float) (viewportWidth * 2.0f - 1.0f),
-				(float) (1.0f - 2.0f * y) / (float) viewportHeight, // Y axis has to
+		float[] m2 = { x /  ((float)viewportWidth) * 2.0f - 1.0f,
+				 1.0f - (2.0f * y) / (float) viewportHeight, // Y axis has to
 																// be flipped
 				z * 2.0f - 1.0f, 1.0f };
 		/**
