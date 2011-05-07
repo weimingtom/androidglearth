@@ -74,7 +74,7 @@ public class ClipLevelN {
 
 	// TODO
 	public void loadPart(int x, int y) {
-		Tile tile = new Tile(x, y, 0) {
+		Tile tile = new Tile(zoom, x, y, 0) {
 
 			@Override
 			public void onload(TileProvider tileprovider) {

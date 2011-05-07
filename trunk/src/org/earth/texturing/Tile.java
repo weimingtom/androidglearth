@@ -17,9 +17,10 @@ public abstract class Tile implements Comparable<Tile> {
 	public int zoom;
 	public long requestTime;
 
-	public Tile(int x, int y, int failed) {
+	public Tile(int zoom, int x, int y,  int failed) {
 		this.x = x;
 		this.y = y;
+		this.zoom = zoom;
 		this.failed = failed;
 
 		this.state = State.PREPARING;

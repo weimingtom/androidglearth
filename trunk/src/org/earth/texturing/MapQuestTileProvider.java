@@ -16,7 +16,7 @@ public class MapQuestTileProvider extends OSMTileProvider {
 		Random rand = new Random();
 		StringBuffer buff = new StringBuffer();
 		buff.append("http://otile").append(1 +rand.nextInt(3))
-			.append(".mqcdn.com/tiles/1.0.0/osm/").append(zoom+1).append("/")
+			.append(".mqcdn.com/tiles/1.0.0/osm/").append(zoom).append("/")
 			.append(x).append("/").append(y).append(".png");
 		try {
 			return new URL(buff.toString());
