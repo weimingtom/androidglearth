@@ -103,8 +103,8 @@ public class Camera {
 
 	public float[] getTarget(Scene scene) {
 		// This can be optimized a lot
-		return scene.getLatLongForXY(scene.context.viewportWidth / 2,
-				scene.context.viewportHeight / 2, true);
+		return scene.getLatLongForXY((float)scene.context.viewportWidth / 2.0f,
+				(float)scene.context.viewportHeight / 2.0f, true);
 	}
 
 	private void calcZoom_() {
