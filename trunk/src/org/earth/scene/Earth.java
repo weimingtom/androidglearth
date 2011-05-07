@@ -73,7 +73,7 @@ public class Earth {
 					"http://webglearth.googlecode.com/svn/resources/terrain/CleanTOPO2/"
 							+ "{z}/{x}/{y}.png", 3, 5, 256);
 			this.clipStackT_ = new ClipStack(this.terrainProvider_,
-					this.context, 2, 3, 2, 5);
+					this.context, 4, 3, 2, 5);
 		} else {
 			Log.w(TAG, "VTF not supported..");
 		}

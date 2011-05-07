@@ -58,8 +58,8 @@ public class ClipLevelN {
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, texture);
 			MyGLUtils.checkGlError("glBindTexture");
 			
-			System.out.println("Format "+GLUtils.getInternalFormat(tile.image));
-			System.out.println("Type "+GLUtils.getType(tile.image));
+			//System.out.println("Format "+GLUtils.getInternalFormat(tile.image));
+			//System.out.println("Type "+GLUtils.getType(tile.image));
 			
 			GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0,
 					tile.x * tileSize, (tileCount - tile.y - 1) * tileSize, tile.image, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
