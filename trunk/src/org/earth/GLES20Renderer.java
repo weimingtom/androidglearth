@@ -37,7 +37,7 @@ public class GLES20Renderer implements GLSurfaceView.Renderer {
         mTimer.addMark();
         mTimer.logFPS();
         
-        scene.draw();
+        this.context.renderFrame();
         
         MyGLUtils.runGlRunnables();
     }
