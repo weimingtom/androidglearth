@@ -75,7 +75,8 @@ public class Earth {
 			this.clipStackT_ = new ClipStack(this.terrainProvider_,
 					this.context, 4, 3, 2, 5);
 		} else {
-			Log.w(TAG, "VTF not supported..");
+			if(!TERRAIN)
+				Log.w(TAG, "VTF not supported..");
 		}
 
 		this.changeTileProvider(this.currentTileProvider_, true);
@@ -88,7 +89,7 @@ public class Earth {
 		vertexShaderCode = vertexShaderCode.replace(
 				"%BUFFER_SIDE_FLOAT%",
 				String.valueOf(org.earth.Utils.toFixed(
-						this.getBufferSideSize_(true), 1)));
+						this.getBufferSideSize_(TERRAIN), 1)));
 
 		vertexShaderCode = vertexShaderCode.replace("%TERRAIN_BOOL%",
 				this.terrain ? "1" : "0");
