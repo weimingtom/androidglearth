@@ -115,7 +115,7 @@ public class ClipStack {
 		float posX = (float) ((lon / (2 * Math.PI) + 0.5) * tileCount);
 		float posY = (float) ((0.5 - Math.log(Math.tan(lat / 2.0 + Math.PI
 				/ 4.0))
-				/ (Math.PI * 2)) * tileCount);
+				/ (Math.PI * 2.0)) * tileCount);
 		for (int i = zoomLevel - this.minLevel_; i >= this.buffersOffset_; i--) {
 			this.levels_[i].moveCenter(posX, posY);
 			posX /= 2;

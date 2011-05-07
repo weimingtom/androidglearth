@@ -17,22 +17,40 @@ public class MyGLUtils {
 
 	public static float[] multMatrix(float[] m1, float[] m2) {
 		// TODO
+		float[] m1i = new float[16];
+		Matrix.transposeM(m1i, 0, m1, 0);
+		float[] m2i = new float[16];
+		Matrix.transposeM(m2i, 0, m2, 0);
 		float[] m3 = new float[16];
-		Matrix.multiplyMM(m3, 0, m1, 0, m2, 0);
-		return m3;
+		
+		Matrix.multiplyMM(m3, 0, m1i, 0, m2i, 0);
+		
+		float[] m3i = new float[16];
+		Matrix.transposeM(m3i, 0, m3, 0);
+		return m3i;
 	}
 
 	public static float[] multMatrixVector(float[] m1, float[] m2) {
 		// TODO
 		float[] m3 = new float[4];
-		Matrix.multiplyMV(m3, 0, m1, 0, m2, 0);
+		float[] m1i = new float[16];
+		Matrix.transposeM(m1i, 0, m1, 0);
+		
+		Matrix.multiplyMV(m3, 0, m1i, 0, m2, 0);
+		
 		return m3;
 	}
 
 	public static float[] inverseMatrix(float[] m1) {
 		float[] m2 = new float[16];
-		Matrix.invertM(m2, 0, m1, 0);
-		return m2;
+		float[] m1i = new float[16];
+		Matrix.transposeM(m1i, 0, m1, 0);
+		
+		Matrix.invertM(m2, 0, m1i, 0);
+		
+		float[] m2i = new float[16];
+		Matrix.transposeM(m2i, 0, m2, 0);
+		return m2i;
 	}
 
 	public static GLBuffer createBuffer(int size) {

@@ -16,7 +16,7 @@ public class Utils {
 
 	public static float standardLongitudeRadians(float lon) {
 		float standard = Utils.modulo(lon, (float) (2 * Math.PI));
-		return (float) (standard > Math.PI ? standard - 2 * Math.PI : standard);
+		return (float) (standard > ((float)Math.PI) ? standard - 2.0f * Math.PI : standard);
 	}
 
 	public static float modulo(float a, float b) {
