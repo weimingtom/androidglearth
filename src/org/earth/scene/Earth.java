@@ -181,12 +181,12 @@ public class Earth {
 			// If camera is not pointed at Earth, just fallback to latlon now
 			cameraTarget = this.scene.camera.getPosition();
 		}
-		this.offset[0] = (int) Math.floor(cameraTarget[1] / (2 * Math.PI)
-				* this.tileCount);
-		this.offset[1] = (int) Math.floor(Scene
+		this.offset[0] = (float) Math.floor(cameraTarget[1] / (2.0f * Math.PI)
+				* (float)this.tileCount);
+		this.offset[1] = (float) Math.floor(Scene
 				.projectLatitude(cameraTarget[0])
-				/ (Math.PI * 2)
-				* this.tileCount);
+				/ (Math.PI * 2.0f)
+				* (float)this.tileCount);
 
 		this.clipStackA_.moveCenter(cameraTarget[0], cameraTarget[1],
 				(int) Math.floor(this.scene.camera.getZoom()));
