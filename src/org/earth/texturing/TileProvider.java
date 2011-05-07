@@ -32,7 +32,7 @@ public abstract class TileProvider {
 	public abstract void appendCopyrightContent();
 
 	public boolean loadTile(Tile tile) {
-		Tile t = new Tile(tile.x, tile.y, tile.failed) {
+		Tile t = new Tile(tile.zoom, tile.x, tile.y, tile.failed) {
 
 			@Override
 			public void onload(TileProvider tileprovider) {

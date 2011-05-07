@@ -102,12 +102,8 @@ public class TileCache {
 
 	public class CachedTile extends Tile {
 
-		public CachedTile(int x, int y, int failed) {
-			super(x, y, failed);
-		}
-
 		public CachedTile(int zoom, int x, int y, long requestTime) {
-			super(x, y, 0);
+			super(zoom, x, y, 0);
 		}
 
 		/**
