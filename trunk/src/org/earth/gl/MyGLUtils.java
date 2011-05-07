@@ -91,10 +91,10 @@ public class MyGLUtils {
 		if (invertedMVP == null)
 			return null;
 
-		float[] m2 = { x / (float) (viewportWidth * 2 - 1),
-				(float) (1 - 2 * y) / (float) viewportHeight, // Y axis has to
+		float[] m2 = { x / (float) (viewportWidth * 2.0f - 1.0f),
+				(float) (1.0f - 2.0f * y) / (float) viewportHeight, // Y axis has to
 																// be flipped
-				z * 2 - 1, 1 };
+				z * 2.0f - 1.0f, 1.0f };
 		/**
 		 * @type {goog.math.Matrix}
 		 */
