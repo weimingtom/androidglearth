@@ -66,7 +66,7 @@ public class Scene {
 			float ldotc = Vec3.dot(direction, sphereCenter);
 			float cdotc = Vec3.dot(sphereCenter, sphereCenter);
 
-			float val = ldotc * ldotc - cdotc + 1;
+			float val = ldotc * ldotc - cdotc + 1.0f;
 
 			if (val < 0) {
 				return null;
@@ -103,7 +103,7 @@ public class Scene {
 		}
 		Vec3 bod = Vec3.sum(orig, dir.scale(ds[0]));
 
-		float lon = (float) Math.asin(bod.x / Math.sqrt(1 - bod.y * bod.y));
+		float lon = (float) Math.asin(bod.x / Math.sqrt(1.0f - bod.y * bod.y));
 
 		if (bod.z < 0) // The point is on the "other side" of the sphere
 			lon = (float) (Math.PI - lon);
@@ -177,10 +177,10 @@ public class Scene {
 	};
 
 	public static float projectLatitude(float latitude) {
-		return (float) Math.log(Math.tan(latitude / 2.0 + Math.PI / 4.0));
+		return (float) Math.log(Math.tan(latitude / 2.0f + Math.PI / 4.0f));
 	};
 
 	public static float unprojectLatitude(float latitude) {
-		return (float) (2 * Math.atan(Math.exp(latitude)) - Math.PI / 2);
+		return (float) (2.0f * Math.atan(Math.exp(latitude)) - Math.PI / 2.0f);
 	};
 }

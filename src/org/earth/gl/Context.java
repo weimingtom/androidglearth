@@ -84,17 +84,17 @@ public class Context {
 		this.fov = (float) Math.toRadians(fovy);
 		this.zNear_ = zNear;
 		this.zFar_ = zFar;
-		this.aspectRatio = this.viewportWidth / this.viewportHeight;
+		this.aspectRatio = (float)this.viewportWidth / (float)this.viewportHeight;
 
 		this.setPerspectiveInternal_();
 	}
 
 	private void setPerspectiveInternal_() {
-		float f = (float) (1 / Math.tan(this.fov / 2));
-		float[] tmp = { f / this.aspectRatio, 0, 0, 0, 0, f, 0, 0, 0, 0,
+		float f = (float) (1.0f / Math.tan(this.fov / 2.0f));
+		float[] tmp = { f / this.aspectRatio, 0.0f, 0.0f, 0.0f, 0.0f, f, 0.0f, 0.0f, 0.0f, 0.0f,
 				(this.zFar_ + this.zNear_) / (this.zNear_ - this.zFar_),
-				2 * this.zFar_ * this.zNear_ / (this.zNear_ - this.zFar_), 0,
-				0, -1, 0 };
+				2.0f * this.zFar_ * this.zNear_ / (this.zNear_ - this.zFar_), 0.0f,
+				0.0f, -1.0f, 0.0f };
 		this.projectionMatrix = tmp;
 	}
 	
