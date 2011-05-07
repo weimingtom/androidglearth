@@ -21,7 +21,7 @@ public class Earth {
 	 * 
 	 * Average radius of Earth in meters.
 	 */
-	public static final float EARTH_RADIUS = 6371009;
+	public static final float EARTH_RADIUS = 6371009.0f;
 
 	/**
 	 * Enable terrain rendering.
@@ -209,7 +209,7 @@ public class Earth {
 		this.context.rotate001(-this.scene.camera.roll);
 		this.context.rotate100(-this.scene.camera.tilt);
 		this.context.rotate001(-this.scene.camera.heading);
-		this.context.translate(0, 0, -1 - this.scene.camera.getAltitude()
+		this.context.translate(0, 0, -1.0f - this.scene.camera.getAltitude()
 				/ EARTH_RADIUS);
 		this.context.rotate100(this.scene.camera.getLatitude());
 		this.context.rotate010(-this.scene.camera.getLongitude());
