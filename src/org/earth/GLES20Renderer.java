@@ -6,6 +6,8 @@ import javax.microedition.khronos.opengles.GL10;
 import org.earth.gl.Context;
 import org.earth.gl.MyGLUtils;
 import org.earth.scene.Scene;
+import org.earth.ui.SceneDragger;
+import org.earth.ui.SceneZoomer;
 
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
@@ -25,6 +27,10 @@ public class GLES20Renderer implements GLSurfaceView.Renderer {
 	private EarthGLSurfaceView mGLSurfaceView;
 
 	private Context context;
+
+	private SceneDragger sceneDragger;
+
+	private SceneZoomer sceneZoomer;
 
     GLES20Renderer(Activity activity, EarthGLSurfaceView mGLSurfaceView) {
         mActivity = activity;
@@ -59,7 +65,16 @@ public class GLES20Renderer implements GLSurfaceView.Renderer {
     }
 
 	public void handleTouch(MotionEvent event) {
+		if(this.sceneDragger == null) {
+			this.sceneDragger = new SceneDragger(scene);
+		}
+		sceneDragger.handleTouch(event);
+		if(this.sceneZoomer == null) {
+			this.sceneZoomer = new SceneZoomer(scene);
+		}
+		sceneZoomer.handleTouch(event);
 		//mProgramme1.handleTouch(event);
+		
 	}
 
 }
