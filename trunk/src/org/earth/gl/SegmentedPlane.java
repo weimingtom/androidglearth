@@ -4,6 +4,15 @@ import java.util.ArrayList;
 
 import android.opengl.GLES20;
 
+/**
+ * Object representing a segmented plane.
+ * @param {!we.gl.Context} context WebGL context.
+ * @param {number} width Width of plane in segments.
+ * @param {number} height Height of plane in segments.
+ * @param {number} subdiv Subdivision of each segment.
+ * @param {boolean=} opt_nolod If true, the plane is created with same amount of
+ *                             subdivision even in more excentric areas.
+ */
 public class SegmentedPlane extends Mesh {
 	
 	private ArrayList<Float> vertices_;
@@ -16,9 +25,9 @@ public class SegmentedPlane extends Mesh {
 		this.indices_ = new ArrayList<Integer>();
 		
 		//this.generateTile_(0,0,subdiv,[false,true,false,false]);
-	  for (float x = ((float)-width) / 2; x < width / 2; ++x)
+	  for (float x = ((float)-width) / 2.0f; x < width / 2.0f; ++x)
 	  {
-	    for (float y = ((float)-height) / 2; y < height / 2; ++y)
+	    for (float y = ((float)-height) / 2.0f; y < height / 2.0f; ++y)
 	    {
 	    	int thisSubdiv = calcSubdiv(opt_nolod, subdiv, x, y);
 	      boolean [] doubles = {y + 1 < height / 2 &&
@@ -66,6 +75,13 @@ public class SegmentedPlane extends Mesh {
 	  this.numIndices = this.indices_.size();
 	}
 	
+	/**
+	 * @param {number} offX Offset of the tile.
+	 * @param {number} offY Offset of the tile.
+	 * @param {number} subdiv Subdivision of this tile.
+	 * @param {Array.<boolean>} doubles TRBL.
+	 * @private
+	 */
 	private void generateTile_(float offX, float offY, int subdiv, boolean[] doubles) {
 		  /** @type {number} */
 		  int offIndices = this.vertices_.size() / 2;
@@ -78,8 +94,8 @@ public class SegmentedPlane extends Mesh {
 		      
 		      // TODO
 			  // v axis texture coordinates are not inverted in android
-		      //  this.coords_.add((float)(1.0f-y / (floatsubdiv));
-		      this.coords_.add((float)y / (float)subdiv);
+		      this.coords_.add(1.0f - (float)y / (float)subdiv);
+		      //this.coords_.add((float)y / (float)subdiv);
 		    }
 		  }
 
@@ -93,9 +109,9 @@ public class SegmentedPlane extends Mesh {
 		    	this.coords_.add((float)((x + 0.5f) / (float)subdiv));
 		    	
 			    // TODO
-				// v axis texture coordinates are not inverted in android
-		    	// this.coords_.add(0.0f);
-		    	this.coords_.add(1.0f);
+				// v axis texture coordinates are inverted in android
+		    	this.coords_.add(0.0f);
+		    	//this.coords_.add(1.0f);
 		    }
 		  }
 		  if (doubles[1]) { //RIGHT
@@ -106,9 +122,9 @@ public class SegmentedPlane extends Mesh {
 		      this.coords_.add((float)1);
 		      
 		      // TODO
-			  // v axis texture coordinates are not inverted in android
-		      //  this.coords_.add((float)(1 - (y + 0.5f) / (float)subdiv));
-		      this.coords_.add((float) (y + 0.5f) / (float)subdiv);
+			  // v axis texture coordinates are inverted in android
+		      this.coords_.add((float)(1 - (y + 0.5f) / (float)subdiv));
+		      //this.coords_.add((float) (y + 0.5f) / (float)subdiv);
 		    }
 		  }
 		  if (doubles[2]) { //BOTTOM
@@ -119,9 +135,9 @@ public class SegmentedPlane extends Mesh {
 		    	this.coords_.add((float)((x + 0.5f) / (float)subdiv));
 		    	
 		    	// TODO
-			    // v axis texture coordinates are not inverted in android
-			    // this.coords_.add(1.0f);
-		    	this.coords_.add(0.0f);
+			    // v axis texture coordinates are inverted in android
+			    this.coords_.add(1.0f);
+		    	//this.coords_.add(0.0f);
 		    }
 		  }
 		  if (doubles[3]) { //LEFT
@@ -132,9 +148,9 @@ public class SegmentedPlane extends Mesh {
 		    	this.coords_.add(0.0f);
 		    	
 		    	// TODO
-			    // v axis texture coordinates are not inverted in android
-			    // this.coords_.add((float)(1 - (y + 0.5f) / (float)subdiv));
-		    	this.coords_.add((float)(y + 0.5f) / (float)subdiv);
+			    // v axis texture coordinates are inverted in android
+			    this.coords_.add((float)(1 - (y + 0.5f) / (float)subdiv));
+		    	//this.coords_.add((float)(y + 0.5f) / (float)subdiv);
 		    }
 		  }
 		  
@@ -221,11 +237,11 @@ public class SegmentedPlane extends Mesh {
 	}
 
 	public int nearestLowerPOT(float num) {
-		return (int) Math.max(1, Math.pow(2, Math.ceil(Math.log(num) / org.earth.Utils.LN2)));
+		return (int) Math.max(1.0f, Math.pow(2.0f, Math.ceil(Math.log(num) / org.earth.Utils.LN2)));
 	}
 	
 	public int calcSubdiv(boolean nolod, int subdiv, float x, float y) {
 		return nolod ? subdiv :
-	        nearestLowerPOT((float) (subdiv / Math.max(1, Math.sqrt(x * x + y * y))));
+	        nearestLowerPOT((float) ((float)subdiv / Math.max(1, Math.sqrt(x * x + y * y))));
 	}
 }

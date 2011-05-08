@@ -42,5 +42,5 @@ void main(){
   } else {
     gl_FragColor=texture2D(uBufferLn,vTCA);
   }
-  //gl_FragColor = mix(gl_FragColor, vec4(1.0,0.0,0.0,1.0), float(vFallbackA)/4.0); //useful for clipstack debugging - fallback levels are red and LevelN is slightly cyan
+  gl_FragColor = mix(gl_FragColor, vec4(1.0,0.0,0.0,1.0), float(vFallbackA)/4.0); //useful for clipstack debugging - fallback levels are red and LevelN is slightly cyan
 }
