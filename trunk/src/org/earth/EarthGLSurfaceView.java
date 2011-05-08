@@ -2,7 +2,6 @@ package org.earth;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
-import android.opengl.GLSurfaceView.Renderer;
 import android.view.MotionEvent;
 
 public class EarthGLSurfaceView extends GLSurfaceView {

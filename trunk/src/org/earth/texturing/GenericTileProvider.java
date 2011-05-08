@@ -3,8 +3,6 @@ package org.earth.texturing;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.earth.Utils;
-
 public class GenericTileProvider extends TileProvider {
 
 	private int minZoom;

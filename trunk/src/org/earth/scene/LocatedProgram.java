@@ -4,11 +4,8 @@ import org.earth.gl.Context;
 import org.earth.gl.MyGLUtils;
 
 import android.opengl.GLES20;
-import android.util.Log;
 
 public class LocatedProgram {
-	private static final String TAG = "LocatedProgram";
-	
 	public int program;
 	public int bufferL0Uniform;
 	public int bufferL1Uniform;
