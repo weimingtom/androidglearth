@@ -1,7 +1,5 @@
 package org.earth.gl;
 
-import org.earth.Utils;
-
 import android.opengl.GLES20;
 
 public class Plane extends Mesh {
