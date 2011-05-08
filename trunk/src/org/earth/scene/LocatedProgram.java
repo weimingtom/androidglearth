@@ -68,6 +68,12 @@ public class LocatedProgram {
 
 		this.bufferLnUniform = this.getValidatedUniformLocation_(this.program,
 				"uBufferLn");
+		
+		this.tileCountUniform = this.getValidatedUniformLocation_(
+				this.program, "uTileCount");
+		
+		this.offsetUniform = this.getValidatedUniformLocation_(
+				this.program, "uOffset");
 
 		if (terrain) {
 			this.degradationTUniform = this.getValidatedUniformLocation_(
@@ -84,10 +90,6 @@ public class LocatedProgram {
 					this.program, "uBufferL1T");
 			this.bufferLnTUniform = this.getValidatedUniformLocation_(
 					this.program, "uBufferLnT");
-			this.tileCountUniform = this.getValidatedUniformLocation_(
-					this.program, "uTileCount");
-			this.offsetUniform = this.getValidatedUniformLocation_(
-					this.program, "uOffset");
 		}
 	}
 
