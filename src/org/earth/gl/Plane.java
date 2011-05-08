@@ -35,6 +35,14 @@ public class Plane extends Mesh {
 
 		  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.texCoordBuffer.bufferId);
 
+		  // TODO
+		  // v axis texture coordinates are inverted in android
+//		  float [] coords = {
+//		    1.0f, 1.0f,
+//		    0.0f, 1.0f,
+//		    1.0f, 0.0f,
+//		    0.0f, 0.0f
+//		  };
 		  float [] coords = {
 		    1.0f, 0.0f,
 		    0.0f, 0.0f,

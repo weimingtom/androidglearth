@@ -147,5 +147,5 @@ void main(){
   } else {
     vTCA = (tileCoords + aTextureCoord)/uTileCount;
   }
-  vTCA.y = 1.0-vTCA.y; //flip Y axis
+  vTCA.y = vTCA.y; //flip Y axis
 }
