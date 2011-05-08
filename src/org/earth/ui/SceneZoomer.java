@@ -6,13 +6,142 @@ import android.view.MotionEvent;
 
 public class SceneZoomer {
 
+	/**
+	 * @define {number} Number of levels to zoom on MouseWheel event.
+	 */
+	public static final float MOUSERZOOMER_ZOOMSTEP = 0.5f;
+
+	/**
+	 * @define {number} How to modify distance on MouseWheel event.
+	 */
+	public static final float MOUSERZOOMER_DISTANCEMODIFIER = 2.0f;
+
+	/**
+	 * @define {number} Duration of zooming animation in miliseconds.
+	 */
+	public static final int MOUSERZOOMER_DURATION = 120;
+
+	private Animation animation_;
+
+	private boolean fixedAltitude;
+
+	private Scene scene_;
+
+	private float targetX_;
+
+	private float startX_;
+
+	private boolean initMt;
+
+	private float lastPinchSize;
+
 	public SceneZoomer(Scene scene) {
-		// TODO Auto-generated constructor stub
+		this.scene_ = scene;
+		this.fixedAltitude = this.scene_.camera.fixedAltitude;
 	}
 
-	public void handleTouch(MotionEvent event) {
+	public void handleTouch(MotionEvent e) {
+		if (e.getPointerCount() >= 2) {
+			float x1 = e.getX(0);
+			float y1 = e.getY(0);
+
+			float x2 = e.getX(1);
+			float y2 = e.getY(1);
+			float x = Math.abs(x1 - x2);
+			float y = Math.abs(y1 - y2);
+			float pinchSize = (float) Math.sqrt(x * x + y * y);
+
+			if (initMt) {
+				float deltaZ = pinchSize - lastPinchSize;
+
+				float altfactor = deltaZ / 20.0f;
+				if (this.fixedAltitude) {
+					float currentAlt = this.scene_.camera.getAltitude();
+					currentAlt *= Math.pow(2.0f,-altfactor);
+					this.scene_.camera.setAltitude(currentAlt);
+				} else {
+					float currentZoom = this.scene_.camera.getZoom();
+					currentZoom *= Math.pow(2.0f,altfactor);
+					this.scene_.camera.setZoom(currentZoom);
+				}
+
+				// altfactor = Math.min(altfactor, ALT_MAX);
+				// altfactor = Math.max(altfactor, ALT_MIN);
+				// System.out.println("altfactor : "+altfactor);
+				// Matrix.translateM(moonRotationMatrix, 0, 0, 0, deltaZ /
+				// 20.0f);
+			} else {
+				initMt = true;
+			}
+			lastPinchSize = pinchSize;
+		}
 		// TODO Auto-generated method stub
-		
+
 	}
+
+	/**
+	 * Starts zooming in given direction or does nothing if zooming in that
+	 * direction is already in progress.
+	 * 
+	 * @param {number} direction Direction of zooming +1 means in, -1 means out.
+	 * @private
+	 */
+	public void zoom_(float direction) {
+		int duration = MOUSERZOOMER_DURATION;
+		if (this.animation_ != null
+				&& this.fixedAltitude != this.scene_.camera.fixedAltitude) {
+			this.animation_.reset();
+			this.animation_ = null;
+		}
+		this.fixedAltitude = this.scene_.camera.fixedAltitude;
+		if (this.fixedAltitude)
+			direction *= -1;
+		if (this.animation_ != null) {
+			if ((this.targetX_ > this.startX_) == (direction > 0)) { // Same dir
+				return;
+			} else { // Opposite direction - just revert to previous level
+				this.animation_.reset();
+				duration *= ((this.fixedAltitude ? this.scene_.camera
+						.getAltitude() : this.scene_.camera.getZoom()) - this.startX_)
+						/ (this.targetX_ - this.startX_);
+				float tempX = this.targetX_;
+				this.targetX_ = this.startX_;
+				this.startX_ = tempX;
+			}
+		} else {
+			if (this.fixedAltitude) {
+				this.startX_ = this.scene_.camera.getAltitude();
+				this.targetX_ = (float) (this.startX_ * Math.pow(
+						MOUSERZOOMER_DISTANCEMODIFIER, direction));
+			} else {
+				this.startX_ = this.scene_.camera.getZoom();
+				this.targetX_ = this.startX_ + direction
+						* MOUSERZOOMER_ZOOMSTEP;
+			}
+		}
+
+		if (duration <= 0)
+			return;
+		this.animation_ = new Animation(
+				this.fixedAltitude ? this.scene_.camera.getAltitude()
+						: this.scene_.camera.getZoom(), this.targetX_, duration);
+
+		// goog.events.listen(this.animation_,
+		// [goog.fx.Animation.EventType.ANIMATE,
+		// goog.fx.Animation.EventType.FINISH],
+		// function(e) {
+		// if (this.fixedAltitude) {
+		// this.scene_.camera.setAltitude(e.x);
+		// } else {
+		// this.scene_.camera.setZoom(e.x);
+		// }
+		// }, false, this);
+
+		// goog.events.listen(this.animation_,
+		// [goog.fx.Animation.EventType.FINISH],
+		// this.endZooming_, false, this);
+
+		this.animation_.play(false);
+	};
 
 }

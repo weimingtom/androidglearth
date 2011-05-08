@@ -23,7 +23,7 @@ public class SceneDragger {
 		// this.inertialAnimation_ = null;
 		// }
 
-		if (e.getAction() != MotionEvent.ACTION_DOWN && oldX_ != 0.0f && oldY_ != 0.0f) {
+		if (e.getAction() != MotionEvent.ACTION_DOWN && oldX_ != 0.0f && oldY_ != 0.0f && e.getPointerCount() == 1) {
 			onMouseMove_(e);
 		} else {
 			this.oldX_ = e.getX();
