@@ -36,10 +36,10 @@ public class Plane extends Mesh {
 		  GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, this.texCoordBuffer.bufferId);
 
 		  float [] coords = {
-		    1.0f, 1.0f,
-		    0.0f, 1.0f,
 		    1.0f, 0.0f,
-		    0.0f, 0.0f
+		    0.0f, 0.0f,
+		    1.0f, 1.0f,
+		    0.0f, 1.0f
 		  };
 		  
 		  texCoordBuffer.buffer.asFloatBuffer().put(coords);
