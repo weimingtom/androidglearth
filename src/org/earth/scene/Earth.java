@@ -26,7 +26,7 @@ public class Earth {
 	/**
 	 * Enable terrain rendering.
 	 */
-	public static final boolean TERRAIN = true;
+	public static final boolean TERRAIN = false;
 
 	/**
 	 * Defines how many zoom levels the terrain is "delayed" - for texture level
@@ -51,7 +51,7 @@ public class Earth {
 	/**
 	 * This equals 1 << this.scene.getZoom() !
 	 */
-	public int tileCount;
+	public float tileCount;
 	public float[] offset = { 0f, 0f };
 	private SegmentedPlane[] segPlanes_;
 	public LocatedProgram locatedProgram;
@@ -65,7 +65,7 @@ public class Earth {
 			this.currentTileProvider_ = new MapQuestTileProvider();
 		}
 		this.clipStackA_ = new ClipStack(this.currentTileProvider_,
-				this.context, 2, 3, 1, 19);
+				this.context, 4, 3, 1, 19);
 		this.terrain = TERRAIN && this.context.isVTFSupported();
 
 		if (this.terrain) {
@@ -73,7 +73,7 @@ public class Earth {
 					"http://webglearth.googlecode.com/svn/resources/terrain/CleanTOPO2/"
 							+ "{z}/{x}/{y}.png", 3, 5, 256);
 			this.clipStackT_ = new ClipStack(this.terrainProvider_,
-					this.context, 4, 3, 2, 5);
+					this.context, 2, 3, 2, 5);
 		} else {
 			if(!TERRAIN)
 				Log.w(TAG, "VTF not supported..");
