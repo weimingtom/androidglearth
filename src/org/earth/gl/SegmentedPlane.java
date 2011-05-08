@@ -72,10 +72,14 @@ public class SegmentedPlane extends Mesh {
 
 		  for (int y = 0; y <= subdiv; ++y) {
 		    for (int x = 0; x <= subdiv; ++x) {
-		      this.vertices_.add(offX + x / subdiv);
-		      this.vertices_.add(offY + y / subdiv);
-		      this.coords_.add((float)x / subdiv);
-		      this.coords_.add((float)(1 - y) / subdiv);
+		      this.vertices_.add(offX + x / (float)subdiv);
+		      this.vertices_.add(offY + y / (float)subdiv);
+		      this.coords_.add((float)x / (float)subdiv);
+		      
+		      // TODO
+			  // v axis texture coordinates are not inverted in android
+		      //  this.coords_.add((float)(1.0f-y) / subdiv);
+		      this.coords_.add((float)y / (float)subdiv);
 		    }
 		  }
 
@@ -84,37 +88,52 @@ public class SegmentedPlane extends Mesh {
 		  if (doubles[0]) { //TOP
 		    additionStarts[0] = this.vertices_.size() / 2;
 		    for (int x = 0; x < subdiv; ++x) {
-		    	this.vertices_.add((float)(offX + (x + 0.5) / subdiv));
-		    	this.vertices_.add((float)offY + 1);
-		    	this.coords_.add((float)((x + 0.5) / subdiv));
-		    	this.coords_.add((float) 0);
+		    	this.vertices_.add((float)(offX + (x + 0.5f) / (float)subdiv));
+		    	this.vertices_.add((float)offY + 1.0f);
+		    	this.coords_.add((float)((x + 0.5f) / (float)subdiv));
+		    	
+			    // TODO
+				// v axis texture coordinates are not inverted in android
+		    	// this.coords_.add((float) 0.0f);
+		    	this.coords_.add((float) 1.0f);
 		    }
 		  }
 		  if (doubles[1]) { //RIGHT
 		    additionStarts[1] = this.vertices_.size() / 2;
 		    for (int y = 0; y < subdiv; ++y) {
 		      this.vertices_.add((float) (offX + 1));
-		      this.vertices_.add((float) (offY + (y + 0.5) / subdiv));
+		      this.vertices_.add((float) (offY + (y + 0.5) / (float) subdiv));
 		      this.coords_.add((float)1);
-		      this.coords_.add((float)(1 - (y + 0.5) / subdiv));
+		      
+		      // TODO
+			  // v axis texture coordinates are not inverted in android
+		      //  this.coords_.add((float)(1 - (y + 0.5) / subdiv));
+		      this.coords_.add((float) (y + 0.5f) / (float)subdiv);
 		    }
 		  }
 		  if (doubles[2]) { //BOTTOM
 		    additionStarts[2] = this.vertices_.size() / 2;
 		    for (int x = 0; x < subdiv; ++x) {
-		    	this.vertices_.add((float) (offX + (x + 0.5) / subdiv));
+		    	this.vertices_.add((float) (offX + (x + 0.5f) / (float)subdiv));
 		    	this.vertices_.add((float) offY);
-		    	this.coords_.add((float)((x + 0.5) / subdiv));
-		    	this.coords_.add((float)1);
+		    	this.coords_.add((float)((x + 0.5f) / (float)subdiv));
+		    	
+		    	// TODO
+			    // v axis texture coordinates are not inverted in android
+			    // this.coords_.add((float)1.0f);
+		    	this.coords_.add((float)0.0f);
 		    }
 		  }
 		  if (doubles[3]) { //LEFT
 		    additionStarts[3] = this.vertices_.size() / 2;
 		    for (int y = 0; y < subdiv; ++y) {
 		    	this.vertices_.add((float) offX);
-		    	this.vertices_.add((float) (offY + (y + 0.5) / subdiv));
+		    	this.vertices_.add((float) (offY + (y + 0.5) / (float)subdiv));
 		    	this.coords_.add((float)0);
-		    	this.coords_.add((float)(1 - (y + 0.5) / subdiv));
+		    	// TODO
+			    // v axis texture coordinates are not inverted in android
+			    // this.coords_.add((float)(1 - (y + 0.5) / (float)subdiv));
+		    	this.coords_.add((float)(y + 0.5f) / (float)subdiv);
 		    }
 		  }
 		  
