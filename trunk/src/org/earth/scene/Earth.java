@@ -183,8 +183,11 @@ public class Earth {
 		}
 		this.offset[0] = (float) Math.floor(cameraTarget[1] / (2.0f * Math.PI)
 				* (float)this.tileCount);
-		this.offset[1] = (float) Math.floor(Scene
-				.projectLatitude(cameraTarget[0])
+//		this.offset[1] = (float) Math.floor(Scene
+//				.projectLatitude(cameraTarget[0])
+//				/ (Math.PI * 2.0f)
+//				* (float)this.tileCount);
+		this.offset[1] = (float) Math.floor(cameraTarget[0]
 				/ (Math.PI * 2.0f)
 				* (float)this.tileCount);
 

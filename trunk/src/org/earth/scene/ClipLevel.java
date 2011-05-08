@@ -295,7 +295,7 @@ public class ClipLevel {
 		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, this.buffer.texture);
 
 		int xPos = (x + this.offX % this.side_) * tileSize;
-		int yPos = (this.side_ - (y + this.offY % this.side_) - 1)
+		int yPos = (y + this.offY % this.side_)
 				* tileSize;
 
 		GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0, xPos, yPos, tile.image, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
