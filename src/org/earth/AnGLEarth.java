@@ -9,7 +9,7 @@ import android.content.pm.ConfigurationInfo;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 
-public class GLEarth extends Activity {
+public class AnGLEarth extends Activity {
     public EarthGLSurfaceView mGLSurfaceView;
 	
     @Override
