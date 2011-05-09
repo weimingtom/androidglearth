@@ -82,7 +82,7 @@ void main(){
 
   //tile coordinates
   vec2 tileCoords=vec2(mod(aVertexPosition.x-aTextureCoord.x+uOffset.x+uTileCount*0.5,uTileCount),
-  						mod(aVertexPosition.y-aTextureCoord.y+uOffset.y+uTileCount*0.5,uTileCount));
+                       -aTextureCoord.y-aVertexPosition.y-uOffset.y+uTileCount*0.5);
 
   //elevation
   float elev=0.0;
@@ -107,7 +107,7 @@ void main(){
   if (fallbackT >= 0.0) {
     TCT=(offT+aTextureCoord/(exp2(fallbackT)*degradationModifier)+mod(uOffLT[int(fallbackT)],BUFF_SIDE_T))/BUFF_SIDE_T;
   }
-  TCT.y = 1.0 - TCT.y; //flip Y axis
+  //TCT.y = 1.0-TCT.y; //flip Y axis
   if (fallbackT == 0.0) {
     rawElev=texture2D(uBufferL0T,TCT).r;
   } else if (fallbackT == 1.0) {
@@ -147,5 +147,5 @@ void main(){
   } else {
     vTCA = (tileCoords + aTextureCoord)/uTileCount;
   }
-  vTCA.y = 1.0-vTCA.y; //flip Y axis
+  //vTCA.y = 1.0-vTCA.y; //flip Y axis
 }
