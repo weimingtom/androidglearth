@@ -187,7 +187,8 @@ public class Earth {
 //				.projectLatitude(cameraTarget[0])
 //				/ (Math.PI * 2.0f)
 //				* (float)this.tileCount);
-		this.offset[1] = (float) Math.floor(cameraTarget[0]
+		this.offset[1] = (float) Math.floor(Scene
+				.projectLatitude(cameraTarget[0])
 				/ (Math.PI * 2.0f)
 				* (float)this.tileCount);
 
@@ -239,19 +240,21 @@ public class Earth {
 				this.clipStackA_.leveln.texture);
 		GLES20.glUniform1i(this.locatedProgram.bufferLnUniform, 3);
 
+		float[] meta = this.clipStackA_.getMeta(zoom, 0);
 		GLES20.glUniform1fv(this.locatedProgram.metaL0Uniform,
-				this.clipStackA_.getMeta(zoom, 0).length,
-				this.clipStackA_.getMeta(zoom, 0), 0);
+				meta.length,
+				meta, 0);
+		meta = this.clipStackA_.getMeta(zoom, 1);
 		GLES20.glUniform1fv(this.locatedProgram.metaL1Uniform,
-				this.clipStackA_.getMeta(zoom, 1).length,
-				this.clipStackA_.getMeta(zoom, 1), 0);
+				meta.length,
+				meta, 0);
+		meta = this.clipStackA_.getMeta(zoom, 2);
 		GLES20.glUniform1fv(this.locatedProgram.metaL2Uniform,
-				this.clipStackA_.getMeta(zoom, 2).length,
-				this.clipStackA_.getMeta(zoom, 2), 0);
+				meta.length,
+				meta, 0);
 
 		GLES20.glUniform2fv(this.locatedProgram.levelOffsetsUniform,
-				this.clipStackA_.getOffsets(zoom, 3).length,
-				this.clipStackA_.getOffsets(zoom, 3), 0);
+				3,	this.clipStackA_.getOffsets(zoom, 3), 0);
 
 		if (this.terrain) {
 
@@ -277,16 +280,17 @@ public class Earth {
 					this.clipStackT_.leveln.texture);
 			GLES20.glUniform1i(this.locatedProgram.bufferLnTUniform, 6);
 
+			meta = this.clipStackT_.getMeta(terrainZoom, 0);
 			GLES20.glUniform1fv(this.locatedProgram.metaL0TUniform,
-					this.clipStackT_.getMeta(terrainZoom, 0).length,
-					this.clipStackT_.getMeta(terrainZoom, 0), 0);
+					meta.length,
+					meta, 0);
+			meta = this.clipStackT_.getMeta(terrainZoom, 1);
 			GLES20.glUniform1fv(this.locatedProgram.metaL1TUniform,
-					this.clipStackT_.getMeta(terrainZoom, 1).length,
-					this.clipStackT_.getMeta(terrainZoom, 1), 0);
+					meta.length,
+					meta, 0);
 
 			GLES20.glUniform2fv(this.locatedProgram.levelOffsetsTUniform,
-					this.clipStackT_.getOffsets(terrainZoom, 2).length,
-					this.clipStackT_.getOffsets(terrainZoom, 2), 0);
+					2,	this.clipStackT_.getOffsets(terrainZoom, 2), 0);
 		}
 
 		// TODO
