@@ -1,5 +1,6 @@
 package org.earth.ui;
 
+import org.earth.gl.MyGLUtils;
 import org.earth.scene.Scene;
 
 import android.view.MotionEvent;
@@ -61,8 +62,14 @@ public class SceneZoomer {
 					this.scene_.camera.setAltitude(currentAlt);
 				} else {
 					float currentZoom = this.scene_.camera.getZoom();
-					currentZoom *= Math.pow(2.0f,altfactor);
-					this.scene_.camera.setZoom(currentZoom);
+					final float finalZoom = (float) (currentZoom * Math.pow(2.0f,altfactor));
+					MyGLUtils.runOnGlThread(new Runnable() {
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							scene_.camera.setZoom(finalZoom);
+						}
+					});
 				}
 
 				// altfactor = Math.min(altfactor, ALT_MAX);

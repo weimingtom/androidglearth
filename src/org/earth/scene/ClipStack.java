@@ -157,9 +157,15 @@ public class ClipStack {
 		if (zoomLevel > this.maxLevel_)
 			Log.w(TAG, "zoomLevel too high");
 		if (zoomLevel - fallback < this.minLevel_) {
-			return 0;
+			return -1;
 		}
-		return this.levels_[zoomLevel - this.minLevel_ - fallback].buffer.texture;
+		if(this.levels_[zoomLevel - this.minLevel_ - fallback].buffer == null) {
+			Log.e(TAG, "buffer null for zoomLevel"+(zoomLevel- fallback));
+			return -1;
+		} else {
+			return this.levels_[zoomLevel - this.minLevel_ - fallback].buffer.texture;
+		}
+		
 	}
 
 	/**

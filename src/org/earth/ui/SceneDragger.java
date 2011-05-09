@@ -1,5 +1,6 @@
 package org.earth.ui;
 
+import org.earth.gl.MyGLUtils;
 import org.earth.scene.Scene;
 
 import android.view.MotionEvent;
@@ -48,10 +49,15 @@ public class SceneDragger {
 	}
 
 	public void onMouseMove_(MotionEvent e) {
-		int xDiff = (int) (e.getX() - this.oldX_);
-		int yDiff = (int) (e.getY() - this.oldY_);
+		final int xDiff = (int) (e.getX() - this.oldX_);
+		final int yDiff = (int) (e.getY() - this.oldY_);
 
-		this.scenePixelMove_(xDiff, yDiff, false);
+		MyGLUtils.runOnGlThread(new Runnable() {
+			@Override
+			public void run() {
+				scenePixelMove_(xDiff, yDiff, false);
+			}
+		});
 
 		this.oldX_ = e.getX();
 		this.oldY_ = e.getY();
