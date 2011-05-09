@@ -25,18 +25,18 @@ public class SegmentedPlane extends Mesh {
 		this.indices_ = new ArrayList<Integer>();
 		
 		//this.generateTile_(0,0,subdiv,[false,true,false,false]);
-	  for (float x = ((float)-width) / 2.0f; x < width / 2.0f; ++x)
+	  for (float x = ((float)-width) / 2.0f; x < (float)width / 2.0f; ++x)
 	  {
-	    for (float y = ((float)-height) / 2.0f; y < height / 2.0f; ++y)
+	    for (float y = ((float)-height) / 2.0f; y < (float)height / 2.0f; ++y)
 	    {
 	    	int thisSubdiv = calcSubdiv(opt_nolod, subdiv, x, y);
-	      boolean [] doubles = {y + 1 < height / 2 &&
+	      boolean [] doubles = {y + 1 < (float)height / 2.0f &&
 	                     calcSubdiv(opt_nolod, subdiv, x, y + 1) > thisSubdiv,
-	                     x + 1 < width / 2 &&
+	                     x + 1 < (float)width / 2.0f &&
 	                     calcSubdiv(opt_nolod, subdiv, x + 1, y) > thisSubdiv,
-	                     y - 1 > -height / 2 &&
+	                     y - 1 > (float)-height / 2.0f &&
 	                     calcSubdiv(opt_nolod, subdiv, x, y - 1) > thisSubdiv,
-	                     x - 1 > -width / 2 &&
+	                     x - 1 > (float)-width / 2.0f &&
 	                     calcSubdiv(opt_nolod, subdiv, x - 1, y) > thisSubdiv};
 	      this.generateTile_(x, y, thisSubdiv, doubles);
 	    }
@@ -88,8 +88,8 @@ public class SegmentedPlane extends Mesh {
 
 		  for (int y = 0; y <= subdiv; ++y) {
 		    for (int x = 0; x <= subdiv; ++x) {
-		      this.vertices_.add(offX + x / (float)subdiv);
-		      this.vertices_.add(offY + y / (float)subdiv);
+		      this.vertices_.add(offX + (float)x / (float)subdiv);
+		      this.vertices_.add(offY + (float)y / (float)subdiv);
 		      this.coords_.add((float)x / (float)subdiv);
 		      
 		      // TODO
@@ -104,8 +104,8 @@ public class SegmentedPlane extends Mesh {
 		  if (doubles[0]) { //TOP
 		    additionStarts[0] = this.vertices_.size() / 2;
 		    for (int x = 0; x < subdiv; ++x) {
-		    	this.vertices_.add((float)(offX + (x + 0.5f) / (float)subdiv));
-		    	this.vertices_.add((float)offY + 1.0f);
+		    	this.vertices_.add(offX + (float)(x + 0.5f) / (float)subdiv);
+		    	this.vertices_.add(offY + 1.0f);
 		    	this.coords_.add((float)((x + 0.5f) / (float)subdiv));
 		    	
 			    // TODO
@@ -117,8 +117,8 @@ public class SegmentedPlane extends Mesh {
 		  if (doubles[1]) { //RIGHT
 		    additionStarts[1] = this.vertices_.size() / 2;
 		    for (int y = 0; y < subdiv; ++y) {
-		      this.vertices_.add((float) (offX + 1));
-		      this.vertices_.add((float) (offY + (y + 0.5) / (float) subdiv));
+		      this.vertices_.add(offX + 1.0f);
+		      this.vertices_.add(offY + (float)(y + 0.5f) / (float) subdiv);
 		      this.coords_.add((float)1);
 		      
 		      // TODO
@@ -130,9 +130,9 @@ public class SegmentedPlane extends Mesh {
 		  if (doubles[2]) { //BOTTOM
 		    additionStarts[2] = this.vertices_.size() / 2;
 		    for (int x = 0; x < subdiv; ++x) {
-		    	this.vertices_.add((float) (offX + (x + 0.5f) / (float)subdiv));
+		    	this.vertices_.add((float) (offX + (float)(x + 0.5f) / (float)subdiv));
 		    	this.vertices_.add((float) offY);
-		    	this.coords_.add((float)((x + 0.5f) / (float)subdiv));
+		    	this.coords_.add((float)(x + 0.5f) / (float)subdiv);
 		    	
 		    	// TODO
 			    // v axis texture coordinates are inverted in android
@@ -144,7 +144,7 @@ public class SegmentedPlane extends Mesh {
 		    additionStarts[3] = this.vertices_.size() / 2;
 		    for (int y = 0; y < subdiv; ++y) {
 		    	this.vertices_.add((float) offX);
-		    	this.vertices_.add((float) (offY + (y + 0.5) / (float)subdiv));
+		    	this.vertices_.add(offY + (float)(y + 0.5f) / (float)subdiv);
 		    	this.coords_.add(0.0f);
 		    	
 		    	// TODO
