@@ -119,14 +119,14 @@ public class ClipLevel {
 	public void moveCenter(float centerOffX, float centerOffY) {
 		if (!this.degenerated_) {
 			int offX = (int) Utils.modulo(
-					(int) Math.round(centerOffX - this.side_ / 2),
+					(int) Math.round(centerOffX - this.side_ / 2.0f),
 					this.tileCount_);
-			int offY = Math.round(centerOffY - this.side_ / 2);
+			int offY = Math.round(centerOffY - this.side_ / 2.0f);
 
 			int diffX = offX - this.offX;
 			int diffY = offY - this.offY;
 
-			if (Math.abs(diffX) > this.tileCount_ / 2) { // It's shorter the
+			if (Math.abs(diffX) > this.tileCount_ / 2.0f) { // It's shorter the
 															// other way
 				diffX = (int) ((diffX - Math.signum(diffX) * this.tileCount_) % this.tileCount_);
 			}
@@ -212,7 +212,7 @@ public class ClipLevel {
 	 * @param y
 	 */
 	private void needOne(long batchTime, int x, int y) {
-		int centerOffset = (this.degenerated_ ? this.tileCount_ : this.side_) / 2;
+		int centerOffset = (int) ((this.degenerated_ ? this.tileCount_ : this.side_) / 2.0f);
 		x += centerOffset;
 		y += centerOffset;
 		if (this.metaBuffer[y]!=null || this.metaBuffer[y][x] != 1.0f) { // loaded -> dont touch it !
