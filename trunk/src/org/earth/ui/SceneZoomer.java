@@ -42,7 +42,7 @@ public class SceneZoomer {
 	}
 
 	public void handleTouch(MotionEvent e) {
-		if (e.getPointerCount() >= 2) {
+		if (e.getAction() != MotionEvent.ACTION_DOWN && e.getPointerCount() >= 2) {
 			float x1 = e.getX(0);
 			float y1 = e.getY(0);
 
@@ -55,7 +55,7 @@ public class SceneZoomer {
 			if (initMt) {
 				float deltaZ = pinchSize - lastPinchSize;
 
-				float altfactor = deltaZ / 20.0f;
+				float altfactor = deltaZ / 50.0f;
 				if (this.fixedAltitude) {
 					float currentAlt = this.scene_.camera.getAltitude();
 					currentAlt *= Math.pow(2.0f,-altfactor);
@@ -81,6 +81,9 @@ public class SceneZoomer {
 				initMt = true;
 			}
 			lastPinchSize = pinchSize;
+		} else {
+			lastPinchSize = 0;
+			initMt = false;
 		}
 		// TODO Auto-generated method stub
 

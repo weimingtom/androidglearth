@@ -26,7 +26,7 @@ public class Earth {
 	/**
 	 * Enable terrain rendering.
 	 */
-	public static final boolean TERRAIN = false;
+	public static final boolean TERRAIN = true;
 
 	/**
 	 * Defines how many zoom levels the terrain is "delayed" - for texture level
