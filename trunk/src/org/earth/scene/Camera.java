@@ -108,10 +108,10 @@ public class Camera {
 	}
 
 	private void calcZoom_() {
-		float sizeISee = (float) (2 * (this.altitude_ / Earth.EARTH_RADIUS) *
-        Math.tan(this.scene_.context.fov / 2));
+		float sizeISee = (float) (2.0f * (this.altitude_ / Earth.EARTH_RADIUS) *
+        Math.tan(this.scene_.context.fov / 2.0f));
 		float sizeOfOneTile = sizeISee / this.scene_.tilesVertically;
-		float o = (float) (Math.cos(Math.abs(this.latitude_)) * 2 * Math.PI);
+		float o = (float) (Math.cos(Math.abs(this.latitude_)) * 2.0f * Math.PI);
 		
 		this.zoom_ = org.earth.Utils.clamp((float)(Math.log(o / sizeOfOneTile) / org.earth.Utils.LN2),
             this.scene_.getMinZoom(),
@@ -119,11 +119,11 @@ public class Camera {
 	}
 	
 	private void calcAltitude_() {
-		float o = (float) (Math.cos(Math.abs(this.latitude_)) * 2 * Math.PI);
+		float o = (float) (Math.cos(Math.abs(this.latitude_)) * 2.0f * Math.PI);
 		float thisPosDeformation = (float) (o / Math.pow(2, this.zoom_));
 		float sizeIWannaSee = thisPosDeformation * this.scene_.tilesVertically;
-		this.altitude_ = (float) ((1 / Math.tan(this.scene_.context.fov / 2)) *
-			(sizeIWannaSee / 2) * Earth.EARTH_RADIUS);
+		this.altitude_ = (float) ((1.0f / Math.tan(this.scene_.context.fov / 2.0f)) *
+			(sizeIWannaSee / 2.0f) * Earth.EARTH_RADIUS);
 	}
 
 	public void dispatchEvent(CameraEvent cameraEvent) {
