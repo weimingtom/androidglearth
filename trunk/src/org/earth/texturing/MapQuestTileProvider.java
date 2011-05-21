@@ -19,6 +19,7 @@ public class MapQuestTileProvider extends OSMTileProvider {
 			.append(".mqcdn.com/tiles/1.0.0/osm/").append(zoom).append("/")
 			.append(x).append("/").append(y).append(".png");
 		try {
+			System.out.println(buff.toString());
 			return new URL(buff.toString());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();

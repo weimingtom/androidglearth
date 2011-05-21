@@ -42,7 +42,7 @@ public class OSMTileProvider extends TileProvider {
 	@Override
 	public void tileLoadedHandler(Tile tile) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("TILE_LOADED");
 	}
 
 	@Override

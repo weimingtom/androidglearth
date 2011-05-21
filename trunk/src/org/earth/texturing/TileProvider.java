@@ -31,7 +31,7 @@ public abstract class TileProvider {
 	
 	public abstract void appendCopyrightContent();
 
-	public boolean loadTile(Tile tile) {
+	public boolean loadTile(final Tile tile) {
 		Tile t = new Tile(tile.zoom, tile.x, tile.y, tile.failed) {
 
 			@Override
@@ -39,6 +39,9 @@ public abstract class TileProvider {
 				this.state = Tile.State.LOADED;
 				tileprovider.loadingTileCounter--;
 				tileprovider.tileLoadedHandler(this);
+				tile.image = this.image;
+				tile.state = Tile.State.LOADED;
+				tile.onload(TileProvider.this);
 			}
 
 			@Override
@@ -49,6 +52,8 @@ public abstract class TileProvider {
 
 				this.state = Tile.State.ERROR;
 				tileprovider.loadingTileCounter--;
+				tile.state = Tile.State.ERROR;
+				tile.onerror(TileProvider.this);
 			}
 
 		};

@@ -94,8 +94,8 @@ public class SegmentedPlane extends Mesh {
 		      
 		      // TODO
 			  // v axis texture coordinates are not inverted in android
-		      //this.coords_.add(1.0f - (float)y / (float)subdiv);
-		      this.coords_.add((float)y / (float)subdiv);
+		      this.coords_.add(1.0f - (float)y / (float)subdiv);
+		      //this.coords_.add((float)y / (float)subdiv);
 		    }
 		  }
 
@@ -110,8 +110,8 @@ public class SegmentedPlane extends Mesh {
 		    	
 			    // TODO
 				// v axis texture coordinates are inverted in android
-		    	//this.coords_.add(0.0f);
-		    	this.coords_.add(1.0f);
+		    	this.coords_.add(0.0f);
+		    	//this.coords_.add(1.0f);
 		    }
 		  }
 		  if (doubles[1]) { //RIGHT
@@ -123,8 +123,8 @@ public class SegmentedPlane extends Mesh {
 		      
 		      // TODO
 			  // v axis texture coordinates are inverted in android
-		      //this.coords_.add((float)(1 - (y + 0.5f) / (float)subdiv));
-		      this.coords_.add((float) (y + 0.5f) / (float)subdiv);
+		      this.coords_.add((float)(1 - (y + 0.5f) / (float)subdiv));
+		      //this.coords_.add((float) (y + 0.5f) / (float)subdiv);
 		    }
 		  }
 		  if (doubles[2]) { //BOTTOM
@@ -136,8 +136,8 @@ public class SegmentedPlane extends Mesh {
 		    	
 		    	// TODO
 			    // v axis texture coordinates are inverted in android
-			    //this.coords_.add(1.0f);
-		    	this.coords_.add(0.0f);
+			    this.coords_.add(1.0f);
+		    	//this.coords_.add(0.0f);
 		    }
 		  }
 		  if (doubles[3]) { //LEFT
@@ -149,8 +149,8 @@ public class SegmentedPlane extends Mesh {
 		    	
 		    	// TODO
 			    // v axis texture coordinates are inverted in android
-			    //this.coords_.add((float)(1 - (y + 0.5f) / (float)subdiv));
-		    	this.coords_.add((float)(y + 0.5f) / (float)subdiv);
+			    this.coords_.add((float)(1 - (y + 0.5f) / (float)subdiv));
+		    	//this.coords_.add((float)(y + 0.5f) / (float)subdiv);
 		    }
 		  }
 		  
