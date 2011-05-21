@@ -56,6 +56,7 @@ public abstract class Tile implements Comparable<Tile> {
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
+				state = State.LOADING;
 				try {
 					InputStream is;
 					if(imagesrc==null) {
@@ -78,6 +79,7 @@ public abstract class Tile implements Comparable<Tile> {
 					onerror(tileprovider);
 					return;
 				}
+				state = State.LOADED;
 				onload(tileprovider);
 			}
 		}, "Tile loader thread");

@@ -60,7 +60,8 @@ public class ClipLevelN {
 			
 			//System.out.println("Format "+GLUtils.getInternalFormat(tile.image));
 			//System.out.println("Type "+GLUtils.getType(tile.image));
-			
+
+			// TODO
 			GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0,
 					tile.x * tileSize,tile.y * tileSize, tile.image, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
 			MyGLUtils.checkGlError("texSubImage2D");

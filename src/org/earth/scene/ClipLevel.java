@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.earth.Utils;
 import org.earth.gl.Context;
+import org.earth.gl.MyGLUtils;
 import org.earth.texturing.Tile;
 import org.earth.texturing.TileCache;
 import org.earth.texturing.TileProvider;
@@ -83,7 +84,15 @@ public class ClipLevel {
 		this.bufferRequests_ = new ArrayList<Tile>();
 		this.side_ = side;
 		this.tileProvider_ = tileprovider;
-		this.tileCache_ = new TileCache(tileprovider);
+		this.tileCache_ = new TileCache(tileprovider) {
+
+			@Override
+			public void tileCachedHandler(CachedTile cachedTile) {
+				// TODO Auto-generated method stub
+				//bufferTile_(cachedTile);
+			}
+			
+		};
 		this.zoom_ = zoom;
 		this.tileCount_ = 1 << this.zoom_;
 		this.degenerated_ = this.side_ >= this.tileCount_;
@@ -118,10 +127,11 @@ public class ClipLevel {
 	 */
 	public void moveCenter(float centerOffX, float centerOffY) {
 		if (!this.degenerated_) {
+			// TODO
 			int offX = (int) Utils.modulo(
-					(int) Math.round(centerOffX - this.side_ / 2.0f),
+					Math.round(centerOffX - this.side_ / 2.0f),
 					this.tileCount_);
-			int offY = Math.round(centerOffY - this.side_ / 2.0f);
+			int offY = (int) Math.round(centerOffY - this.side_ / 2.0f);
 
 			int diffX = offX - this.offX;
 			int diffY = offY - this.offY;
@@ -267,40 +277,56 @@ public class ClipLevel {
 		return buffered;
 	}
 
-	private void bufferTile_(Tile tile) {
-		if (this.buffer == null) {
-			Log.w(TAG, "Wanted to buffer tile on level without buffer!");
-			return;
-		}
+	private void bufferTile_(final Tile tile) {
+		MyGLUtils.runOnGlThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if (buffer == null) {
+					Log.w(TAG, "Wanted to buffer tile on level without buffer!");
+					return;
+				}
+				
+				if (tile.image == null) {
+					Log.w(TAG, "Tile image is null");
+					return;
+				}
 
-		if (tile.zoom != this.zoom_) {
-			Log.w(TAG, "Mismatched zoom!");
-			return;
-		}
+				if (tile.zoom != zoom_) {
+					Log.w(TAG, "Mismatched zoom!");
+					return;
+				}
 
-		int x = tile.x - this.offX;
-		int y = tile.y - this.offY;
+				int x = tile.x - offX;
+				int y = tile.y - offY;
 
-		int count = 1 << this.zoom_;
-		x = x % count;
-		y = y % count;
+				int count = 1 << zoom_;
+				x = x % count;
+				y = y % count;
 
-		if (x < 0 || x >= this.side_ || y < 0 || y >= this.side_) {
-			Log.w(TAG, "Tile out of bounds!");
-			return;
-		}
+				if (x < 0 || x >= side_ || y < 0 || y >= side_) {
+					Log.w(TAG, "Tile out of bounds!");
+					return;
+				}
+				
+				int tileSize = tileProvider_.getTileSize();
+
+				GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, buffer.texture);
+
+				int xPos = ((x + offX) % side_) * tileSize;
+				
+				// TODO
+//				int yPos = ((this.side_ -
+//					     (y + this.offY) % this.side_) - 1) * tileSize;
+				
+				int yPos = ((y + offY) % side_) * tileSize;
+
+				GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0, xPos, yPos, tile.image, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
+
+				metaBuffer[y][x] = 1.0f;
+			}
+		});
 		
-		int tileSize = this.tileProvider_.getTileSize();
-
-		GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, this.buffer.texture);
-
-		int xPos = (x + this.offX % this.side_) * tileSize;
-		int yPos = (y + this.offY % this.side_)
-				* tileSize;
-
-		GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0, xPos, yPos, tile.image, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
-
-		this.metaBuffer[y][x] = 1.0f;
 	}
 
 	public int getBufferRequestCount() {
