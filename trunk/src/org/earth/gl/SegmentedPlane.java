@@ -73,6 +73,10 @@ public class SegmentedPlane extends Mesh {
 
 	  /** @inheritDoc */
 	  this.numIndices = this.indices_.size();
+	  
+	  vertices_.clear();
+	  indices_.clear();
+	  coords_.clear();
 	}
 	
 	/**
