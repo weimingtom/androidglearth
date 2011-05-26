@@ -27,7 +27,7 @@ public abstract class TileCache {
 	public TileCache(TileProvider tileprovider) {
 
 		this.tileMap_ = new HashMap<String, Tile>();
-		this.targetSize = 512;
+		this.targetSize = 16;
 		this.cleanTimer_ = new Timer();
 
 		cleanTimer_.schedule(new TimerTask() {

@@ -36,7 +36,8 @@ public abstract class Tile implements Comparable<Tile> {
 
 	public void dispose() {
 		// delete this.image;
-		image.recycle();
+		if(image != null)
+			image.recycle();
 	}
 
 	public int compareTo(Tile t) {
