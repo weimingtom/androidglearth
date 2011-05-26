@@ -9,7 +9,7 @@ import android.util.Log;
 public abstract class TileProvider {
 	protected static final String TAG = "TileProvider";
 
-	public int loadingTileCounter;
+	public volatile int loadingTileCounter;
 	public String name;
 
 	public TileProvider(String name) {
