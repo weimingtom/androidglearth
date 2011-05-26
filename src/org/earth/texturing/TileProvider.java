@@ -57,8 +57,7 @@ public abstract class TileProvider {
 			}
 
 		};
-
-		t.state = State.LOADING;
+		tile.state =  State.LOADING;
 		t.imagesrc = this.getTileURL(tile.zoom, tile.x, tile.y);
 		t.load(this);
 

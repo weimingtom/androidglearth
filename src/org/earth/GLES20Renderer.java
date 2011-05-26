@@ -50,10 +50,12 @@ public class GLES20Renderer implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig eglConfig) {
-    	context = new Context(mActivity, mGLSurfaceView, null);
+    	if(context == null)
+    		context = new Context(mActivity, mGLSurfaceView, null);
         context.setPerspective(50.0f, 0.000001f, 5.0f);
     	try {
-			scene = new Scene(context, false, false, false, null, false);
+    		if(scene == null)
+    			scene = new Scene(context, false, false, false, null, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
