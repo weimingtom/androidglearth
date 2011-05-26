@@ -254,7 +254,7 @@ public class ClipLevel {
 	 * @param {number} tilesToBeLoading Number of tiles to be should be loading.
 	 * @return {number} Number of buffered tiles.
 	 */
-	public int processTiles(int tilesToBuffer, int tilesToBeLoading) {
+	public int processTiles(int tilesToBuffer) {
 		int buffered = 0;
 		if (this.bufferRequests_.size() > 0) {
 			int n = Math.min(this.bufferRequests_.size(), tilesToBuffer);
@@ -263,8 +263,6 @@ public class ClipLevel {
 				buffered++;
 			}
 		}
-
-		this.tileCache_.processLoadRequests(tilesToBeLoading);
 
 		return buffered;
 	}

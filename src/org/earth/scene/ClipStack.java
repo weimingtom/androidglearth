@@ -134,9 +134,11 @@ public class ClipStack {
 			this.levels_[i].moveCenter(posX, posY);
 			posX /= 2.0f;
 			posY /= 2.0f;
-			buffQuota -= this.levels_[i].processTiles((buffQuota >= 0) ? 1 : 0,
-					5);
+			buffQuota -= this.levels_[i].processTiles((buffQuota >= 0) ? 1 : 0
+					);
+			
 		}
+		this.tileCache_.processLoadRequests(5);
 	}
 
 	/**
