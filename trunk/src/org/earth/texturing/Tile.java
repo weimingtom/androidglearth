@@ -12,7 +12,7 @@ public abstract class Tile implements Comparable<Tile> {
 	public int y;
 	public Bitmap image;
 	public int failed;
-	public State state;
+	public volatile State state;
 	public URL imagesrc;
 	public int zoom;
 	public long requestTime;
