@@ -2,7 +2,9 @@ package org.earth.scene;
 
 import org.earth.Utils;
 import org.earth.gl.Context;
+import org.earth.texturing.TileCache;
 import org.earth.texturing.TileProvider;
+import org.earth.texturing.TileCache.CachedTile;
 
 import android.util.Log;
 
@@ -17,6 +19,7 @@ public class ClipStack {
 	private int maxLevel_;
 	private ClipLevel[] levels_;
 	private int buffersOffset_;
+	private TileCache tileCache_;
 
 	/**
 	 * @param {!we.texturing.TileProvider} tileprovider TileProvider to be
@@ -36,6 +39,16 @@ public class ClipStack {
 		this.minLevel_ = minLevel;
 		this.maxLevel_ = maxLevel;
 		int tileSize = tileprovider.getTileSize();
+		
+		this.tileCache_ = new TileCache(tileprovider) {
+
+			@Override
+			public void tileCachedHandler(CachedTile cachedTile) {
+				// TODO Auto-generated method stub
+				//bufferTile_(cachedTile);
+			}
+			
+		};
 
 		this.buffers_ = new ClipBuffer[buffers];
 		for (int n = 0; n < buffers; ++n) {
@@ -45,7 +58,7 @@ public class ClipStack {
 
 		this.levels_ = new ClipLevel[maxLevel + 1 - minLevel];
 		for (int z = minLevel; z <= maxLevel; ++z) {
-			this.levels_[z-minLevel] = new ClipLevel(tileprovider, context, side, z);
+			this.levels_[z-minLevel] = new ClipLevel(tileCache_, tileprovider, context, side, z);
 		}
 
 		for (int n = 0; n < buffers; ++n) {

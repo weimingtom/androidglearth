@@ -79,20 +79,12 @@ public class ClipLevel {
 	 */
 	private boolean degenerated_;
 
-	public ClipLevel(TileProvider tileprovider, Context context, int side,
+	public ClipLevel(TileCache tileCache, TileProvider tileprovider, Context context, int side,
 			int zoom) {
 		this.bufferRequests_ = new ArrayList<Tile>();
 		this.side_ = side;
 		this.tileProvider_ = tileprovider;
-		this.tileCache_ = new TileCache(tileprovider) {
-
-			@Override
-			public void tileCachedHandler(CachedTile cachedTile) {
-				// TODO Auto-generated method stub
-				//bufferTile_(cachedTile);
-			}
-			
-		};
+		this.tileCache_ = tileCache;
 		this.zoom_ = zoom;
 		this.tileCount_ = 1 << this.zoom_;
 		this.degenerated_ = this.side_ >= this.tileCount_;
