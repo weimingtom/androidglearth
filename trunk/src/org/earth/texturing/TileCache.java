@@ -14,7 +14,7 @@ import org.earth.Utils;
 
 import android.util.Log;
 
-public abstract class TileCache {
+public class TileCache {
 
 	public static final String TAG = "TileCache";
 	private HashMap<String, Tile> tileMap_;
@@ -128,13 +128,14 @@ public abstract class TileCache {
 
 		@Override
 		public void onerror(TileProvider tileprovider) {
-			// TODO Auto-generated method stub
-
+			loadRequests_.remove(this);
 		}
 
 	}
 	
-	public abstract void tileCachedHandler(CachedTile cachedTile);
+	public void tileCachedHandler(CachedTile cachedTile) {
+		this.loadRequests_.remove(cachedTile);
+	}
 
 	/**
 	 * Returns tile from cache or starts loading it if not available

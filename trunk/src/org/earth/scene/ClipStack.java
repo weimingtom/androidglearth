@@ -40,15 +40,7 @@ public class ClipStack {
 		this.maxLevel_ = maxLevel;
 		int tileSize = tileprovider.getTileSize();
 		
-		this.tileCache_ = new TileCache(tileprovider) {
-
-			@Override
-			public void tileCachedHandler(CachedTile cachedTile) {
-				// TODO Auto-generated method stub
-				//bufferTile_(cachedTile);
-			}
-			
-		};
+		this.tileCache_ = new TileCache(tileprovider);
 
 		this.buffers_ = new ClipBuffer[buffers];
 		for (int n = 0; n < buffers; ++n) {
