@@ -21,7 +21,7 @@ public class Earth {
 	 * 
 	 * Average radius of Earth in meters.
 	 */
-	public static final float EARTH_RADIUS = 6371009.0f;
+	public static final float EARTH_RADIUS = 6378137.0f;
 
 	/**
 	 * Enable terrain rendering.
