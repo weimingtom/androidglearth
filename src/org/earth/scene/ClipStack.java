@@ -4,7 +4,6 @@ import org.earth.Utils;
 import org.earth.gl.Context;
 import org.earth.texturing.TileCache;
 import org.earth.texturing.TileProvider;
-import org.earth.texturing.TileCache.CachedTile;
 
 import android.util.Log;
 
