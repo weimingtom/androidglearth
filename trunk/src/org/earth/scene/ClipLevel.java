@@ -287,6 +287,11 @@ public class ClipLevel {
 					return;
 				}
 
+				//if(GLUtils.getInternalFormat(tile.image) != GLES20.GL_RGB) {
+				//	Log.w(TAG, "Wrong format "+GLUtils.getInternalFormat(tile.image));
+				//	return;
+				//}
+				
 				int x = tile.x - offX;
 				int y = tile.y - offY;
 
@@ -312,6 +317,8 @@ public class ClipLevel {
 				int yPos = ((y + offY) % side_) * tileSize;
 
 				GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0, xPos, yPos, tile.image, GLES20.GL_RGB, GLES20.GL_UNSIGNED_SHORT_5_6_5);	
+				
+				//tile.image.recycle();
 
 				metaBuffer[y][x] = 1.0f;
 			}
