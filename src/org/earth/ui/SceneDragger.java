@@ -3,6 +3,7 @@ package org.earth.ui;
 import org.earth.gl.MyGLUtils;
 import org.earth.scene.Scene;
 
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
 public class SceneDragger {
@@ -55,7 +56,7 @@ public class SceneDragger {
 		MyGLUtils.runOnGlThread(new Runnable() {
 			@Override
 			public void run() {
-				scenePixelMove_(xDiff, yDiff, false);
+				scenePixelMove_(xDiff, yDiff,false);
 			}
 		});
 
@@ -83,6 +84,18 @@ public class SceneDragger {
 			float factor = (float) (Math.PI
 					* (1.0f / (float) this.scene_.context.canvas.getHeight()) * (this.scene_.tilesVertically / Math
 					.pow(2, this.scene_.camera.getZoom())));
+			
+			DisplayMetrics dm = new DisplayMetrics();
+			scene_.context.activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+			
+			switch(dm.densityDpi) {
+				case DisplayMetrics.DENSITY_MEDIUM :
+					factor *= 2.0f;
+					break;
+				case DisplayMetrics.DENSITY_HIGH :
+					factor *= 4.0f;
+					break;
+			}
 
 			// camera transformations
 			rotateAxes(xDiff, yDiff, this.scene_.camera.roll);
