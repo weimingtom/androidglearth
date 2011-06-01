@@ -5,6 +5,8 @@ import org.earth.gl.Context;
 import org.earth.gl.MyGLUtils;
 import org.earth.texturing.TileProvider;
 
+import android.os.Build;
+
 public class Scene {
 	public static final float MIN_ZOOM = 1;
 
@@ -33,6 +35,8 @@ public class Scene {
 
 		this.recalcTilesVertically();
 		this.updateCopyrights();
+		
+		System.out.println("Version : "+Build.VERSION.SDK_INT);
 	}
 
 	public void updateCopyrights() {
