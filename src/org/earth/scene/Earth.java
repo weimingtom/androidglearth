@@ -2,14 +2,12 @@ package org.earth.scene;
 
 import org.earth.ShaderBank;
 import org.earth.gl.Context;
+import org.earth.gl.MyGLUtils;
 import org.earth.gl.SegmentedPlane;
 import org.earth.gl.Shader;
-import org.earth.gl.MyGLUtils;
 import org.earth.texturing.GenericTileProvider;
 import org.earth.texturing.MapQuestTileProvider;
 import org.earth.texturing.TileProvider;
-
-import com.badlogic.gdx.backends.android.AndroidGL20;
 
 import android.opengl.GLES20;
 import android.util.Log;
@@ -293,17 +291,15 @@ public class Earth {
 		SegmentedPlane plane = this.segPlanes_[Math.min(zoom,
 				this.segPlanes_.length - 1)];
 
-		AndroidGL20 agl20 = new AndroidGL20();
-
 		GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, plane.vertexBuffer.bufferId);
-		agl20.glVertexAttribPointer(
+		GLES20.glVertexAttribPointer(
 				this.locatedProgram.vertexPositionAttribute,
 				plane.vertexBuffer.itemSize, GLES20.GL_FLOAT, false, 0, 0);
 		MyGLUtils.checkGlError("glVertexAttribPointer");
 
 		GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER,
 				plane.texCoordBuffer.bufferId);
-		agl20.glVertexAttribPointer(this.locatedProgram.textureCoordAttribute,
+		GLES20.glVertexAttribPointer(this.locatedProgram.textureCoordAttribute,
 				plane.texCoordBuffer.itemSize, GLES20.GL_FLOAT, false, 0, 0);
 		MyGLUtils.checkGlError("glVertexAttribPointer");
 
@@ -323,7 +319,7 @@ public class Earth {
 				plane.indexBuffer.bufferId);
 		MyGLUtils.checkGlError("glBindBuffer");
 		// if (Math.floor(goog.now() / 10000) % 2 === 1)
-		agl20.glDrawElements(GLES20.GL_TRIANGLES, plane.numIndices,
+		GLES20.glDrawElements(GLES20.GL_TRIANGLES, plane.numIndices,
 				GLES20.GL_UNSIGNED_INT, 0);
 		MyGLUtils.checkGlError("glDrawElements");
 		// else
